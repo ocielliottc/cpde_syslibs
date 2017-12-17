@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="op_lite" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc" />
+		<Option virtualFolders="sqLayer/;op_containers/;op_type_factory/;lzmalib_WIN_ONLY/;lzmalib/;" />
+		<Build>
+			<Target title="MSVC_Debug">
+				<Option output=".cmp/msvc/bin/Debug/op_lited" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/RTCsu" />
+					<Add option="/Fd$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.debug) --iso --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --iso --libs`" />
+					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="msvcrtd.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="MSVC_Release">
+				<Option output=".cmp/msvc/bin/Release/op_lite" prefix_auto="0" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Release/" />
+				<Option type="3" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/EHs" />
+					<Add option="/GR" />
+					<Add option="/GF" />
+					<Add option="/Ox" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.release) --iso --cxxflags`" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --iso --libs`" />
+					<Add option="/NODEFAULTLIB:libcmtd.lib" />
+					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="msvcrt.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Debug">
+				<Option output=".cmp/gcc/bin/Debug/op_lited" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_7ZIP_ST" />
+				</Compiler>
+				<Linker>
+					<Add library="msgpackc" />
+					<Add library="dl" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Release">
+				<Option output=".cmp/gcc/bin/Release/op_lite" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-std=c++0x" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-fexceptions" />
+					<Add option="-DNOPCH" />
+					<Add option="-D_7ZIP_ST" />
+				</Compiler>
+				<Linker>
+					<Add library="msgpackc" />
+					<Add library="dl" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DOP_LITE_IMPLEMENTATION" />
+			<Add option="-DSQLITE_ENABLE_COLUMN_METADATA" />
+			<Add option="-DHAVE_USLEEP" />
+			<Add directory="$(CPDE_USR)/include" />
+			<Add directory="$(#boost.include)" />
+			<Add directory="$(#msgpack.include)" />
+		</Compiler>
+		<Linker>
+			<Add directory="$(CPDE_USR)/lib" />
+		</Linker>
+		<Unit filename="lzmalib/7zTypes.h" />
+		<Unit filename="lzmalib/Alloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lzmalib/Alloc.h" />
+		<Unit filename="lzmalib/Compiler.h" />
+		<Unit filename="lzmalib/LzFind.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lzmalib/LzFind.h" />
+		<Unit filename="lzmalib/LzFindMt.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lzmalib_WIN_ONLY/" />
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="lzmalib/LzFindMt.h">
+			<Option virtualFolder="lzmalib_WIN_ONLY/" />
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="lzmalib/LzHash.h" />
+		<Unit filename="lzmalib/LzmaDec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lzmalib/LzmaDec.h" />
+		<Unit filename="lzmalib/LzmaEnc.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lzmalib/" />
+		</Unit>
+		<Unit filename="lzmalib/LzmaEnc.h">
+			<Option virtualFolder="lzmalib/" />
+		</Unit>
+		<Unit filename="lzmalib/LzmaLib.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lzmalib/" />
+		</Unit>
+		<Unit filename="lzmalib/LzmaLib.h">
+			<Option virtualFolder="lzmalib/" />
+		</Unit>
+		<Unit filename="lzmalib/Precomp.h" />
+		<Unit filename="lzmalib/Threads.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="lzmalib_WIN_ONLY/" />
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="lzmalib/Threads.h">
+			<Option virtualFolder="lzmalib_WIN_ONLY/" />
+			<Option target="MSVC_Debug" />
+			<Option target="MSVC_Release" />
+		</Unit>
+		<Unit filename="lzmalib/op_lzma.cpp" />
+		<Unit filename="lzmalib/op_lzma.h" />
+		<Unit filename="miniz/miniz.c">
+			<Option compilerVar="CC" />
+			<Option compile="0" />
+			<Option link="0" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="miniz/op_miniz.cpp" />
+		<Unit filename="miniz/op_miniz.h" />
+		<Unit filename="op_class_factory.cpp">
+			<Option virtualFolder="op_type_factory/" />
+		</Unit>
+		<Unit filename="op_class_factory.h">
+			<Option virtualFolder="op_type_factory/" />
+		</Unit>
+		<Unit filename="op_class_name.cpp" />
+		<Unit filename="op_class_name.h" />
+		<Unit filename="op_database.cpp" />
+		<Unit filename="op_database.h" />
+		<Unit filename="op_database_helper.cpp" />
+		<Unit filename="op_database_helper.h" />
+		<Unit filename="op_lite_config.h" />
+		<Unit filename="op_manager.cpp" />
+		<Unit filename="op_manager.h" />
+		<Unit filename="op_map.cpp">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_map.h">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_msgpack.h">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_new.cpp" />
+		<Unit filename="op_new.h" />
+		<Unit filename="op_object.cpp" />
+		<Unit filename="op_object.h" />
+		<Unit filename="op_packed.cpp">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_packed.h">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_ptr.cpp" />
+		<Unit filename="op_ptr.h" />
+		<Unit filename="op_root.cpp" />
+		<Unit filename="op_root.h" />
+		<Unit filename="op_transaction.cpp" />
+		<Unit filename="op_transaction.h" />
+		<Unit filename="op_type_factory.cpp">
+			<Option virtualFolder="op_type_factory/" />
+		</Unit>
+		<Unit filename="op_type_factory.h">
+			<Option virtualFolder="op_type_factory/" />
+		</Unit>
+		<Unit filename="op_unique_ptr.cpp" />
+		<Unit filename="op_unique_ptr.h" />
+		<Unit filename="op_value.cpp" />
+		<Unit filename="op_value.h" />
+		<Unit filename="op_vector.cpp">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_vector.h">
+			<Option virtualFolder="op_containers/" />
+		</Unit>
+		<Unit filename="op_version.h" />
+		<Unit filename="sqBlob.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqBlob.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqColumn.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqColumn.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqDatabase.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqDatabase.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqQuery.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqQuery.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqRef.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqRef.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqRow.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqRow.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqStatement.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqStatement.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqTable.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqTable.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqTransaction.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqTransaction.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqValue.cpp">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqValue.h">
+			<Option virtualFolder="sqLayer/" />
+		</Unit>
+		<Unit filename="sqlite3/sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sqlite3/sqlite3.h" />
+		<Unit filename="sqlite3/sqlite3ext.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
