@@ -6,7 +6,7 @@
 # NOTE: edit the paths to MessagePack and Boost libraries here 
 #
 MSGPACK_INCLUDE = /usr/local
-BOOST_INCLUDE   = /home/ca/home_work/cpde_root/zdep/3rdparty/boost/boost_1_55_0/
+BOOST_INCLUDE   = /usr/local
 #------------------------------------------------------------------------------------------------------
 
 WORKDIR = `pwd`
