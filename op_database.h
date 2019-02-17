@@ -97,25 +97,25 @@ public:
        \param ptype persistent type string (table name)
        \param where_clause SQL WHERE clause to be evaluated (empty clause returns all)
        \return true when at least one hit */
-   virtual bool  select_ids(list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
+   virtual bool  select_ids(std::list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
 
    /// Get minimum id value(s) from type
    /*! \param ids list of persistent identifiers matching query
        \param ptype persistent type string (table name)
        \param where_clause SQL WHERE clause to be evaluated (may be empty)
        \return true when at least one hit */
-   virtual bool  select_min_ids(list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
+   virtual bool  select_min_ids(std::list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
 
    /// Get maximum id value(s) from type
    /*! \param ids list of persistent identifiers matching query
        \param ptype persistent type string (table name)
        \param where_clause SQL WHERE clause to be evaluated (may be empty)
        \return true when at least one hit */
-   virtual bool  select_max_ids(list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
+   virtual bool  select_max_ids(std::list<op_pid>& ids, const string& ptype, const string& where_clause = "") = 0;
 
    /// restore table names from database
    /*! \param tables list of table names as found in database */
-   virtual void get_tables(list<string>& tables) = 0;
+   virtual void get_tables(std::list<string>& tables) = 0;
 
 protected:
    /// \privatesection (hidden in documentation)
@@ -131,7 +131,7 @@ protected:
    void pop_transaction();
 
 private:
-   typedef list<op_transaction*> TransactionList;
+   typedef std::list<op_transaction*> TransactionList;
    TransactionList  m_tlist;
 
    // using boost bi-directional map, where both values are lookup keys

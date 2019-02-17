@@ -68,25 +68,25 @@ public:
    /*! \param ids list of persistent identifiers matching query
        \param where_clause SQL WHERE clause to be evaluated (empty where_clause returns all)
        \return true when at least one hit */
-   bool  select_ids(list<sqRef>& ids, const string& where_clause = "");
+   bool  select_ids(std::list<sqRef>& ids, const string& where_clause = "");
 
    /// Get minimum id value(s) from table
    /*! \param ids list of persistent identifiers matching query
        \param where_clause SQL WHERE clause to be evaluated (may be empty)
        \return true when at least one hit */
-   bool  select_min_ids(list<sqRef>& ids, const string& where_clause = "");
+   bool  select_min_ids(std::list<sqRef>& ids, const string& where_clause = "");
 
    /// Get maximum id value(s) from table
    /*! \param ids list of persistent identifiers matching query
        \param where_clause SQL WHERE clause to be evaluated (may be empty)
        \return true when at least one hit */
-   bool  select_max_ids(list<sqRef>& ids, const string& where_clause = "");
+   bool  select_max_ids(std::list<sqRef>& ids, const string& where_clause = "");
 
 protected:
    /// \privatesection (hidden in documentation)
 
    /// run a select query
-   bool  select_query(list<sqRef>& ids, const string& query);
+   bool  select_query(std::list<sqRef>& ids, const string& query);
 
    /// restore the table from given database
    sqTable(sqDatabase* db, const string& tname);

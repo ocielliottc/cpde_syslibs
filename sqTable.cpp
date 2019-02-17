@@ -315,7 +315,7 @@ bool sqTable::get_row(const sqRef& id, sqRow& values)
    return (nmatch>0);
 }
 
-bool  sqTable::select_query(list<sqRef>& ids, const string& query)
+bool  sqTable::select_query(std::list<sqRef>& ids, const string& query)
 {
    size_t count=0;
    sqlite3_stmt* statement = 0;
@@ -336,21 +336,21 @@ bool  sqTable::select_query(list<sqRef>& ids, const string& query)
    return (count>0);
 }
 
-bool  sqTable::select_ids(list<sqRef>& ids, const string& where_clause)
+bool  sqTable::select_ids(std::list<sqRef>& ids, const string& where_clause)
 {
    string query = "SELECT ROWID FROM " + name() + ' ' + where_clause + ';';
 
    return select_query(ids,query);
 }
 
-bool  sqTable::select_min_ids(list<sqRef>& ids, const string& where_clause)
+bool  sqTable::select_min_ids(std::list<sqRef>& ids, const string& where_clause)
 {
    string query = "SELECT MIN(ROWID) FROM " + name() + ' ' + where_clause + ';';
 
    return select_query(ids,query);
 }
 
-bool  sqTable::select_max_ids(list<sqRef>& ids, const string& where_clause)
+bool  sqTable::select_max_ids(std::list<sqRef>& ids, const string& where_clause)
 {
    string query = "SELECT MAX(ROWID) FROM " + name() + ' ' + where_clause + ';';
 
