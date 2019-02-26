@@ -37,11 +37,11 @@ op_database_helper::~op_database_helper()
 
 void op_database_helper::close()
 {
+   bool update_database = true;
+   bool delete_transient = true;
    if(m_db && m_readonly) {
-      // flush all transient objects, do NOT write them to the database
-      bool update_database = false;
-      bool delete_transient = true;
-      m_db->flush_cached(update_database,delete_transient);
+      // do NOT write them to the database
+      update_database = false;
    }
-   m_db = op_mgr()->close_database(m_logical_name);
+   m_db = op_mgr()->close_database(m_logical_name,update_database);
 }

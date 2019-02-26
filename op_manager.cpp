@@ -147,10 +147,10 @@ op_database* op_manager::open_create_database(const string& logical_name, const 
 }
 
 
-op_database*  op_manager::close_database(const string&  logical_name)
+op_database*  op_manager::close_database(const string&  logical_name, bool update_database)
 {
    if(op_database* db = get_database(logical_name)) {
-      db->flush_cached(true,true);
+      db->flush_cached(update_database,true);
 
       if(selected_database() == db) {
          // we are closing the selected database, so clear that setting
@@ -161,6 +161,16 @@ op_database*  op_manager::close_database(const string&  logical_name)
       m_dbmap.erase(logical_name);
    }
    return selected_database();
+}
+
+void op_manager::close_all_databases(bool update_database)
+{
+   vector<std::string> logical_names;
+   logical_names.reserve(m_dbmap.size());
+   for(auto& p : m_dbmap)logical_names.push_back(p.first);
+   for(auto& logical_name : logical_names) {
+      close_database(logical_name,update_database);
+   }
 }
 
 op_database* op_manager::get_database(const string& logical_name)

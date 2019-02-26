@@ -58,10 +58,13 @@ public:
        \return database or null if error, the database becomes the selected database on success*/
    op_database* open_create_database(const string& logical_name, const string& file_path);
 
-   /// Close open database, all cached objects will be flushed to db and transient objects deleted
+   /// Close open database, all cached objects will be flushed to db (if update_database=true)
    /*! \param logical_name logical name of database
        \return database after close, normally 0 */
-   op_database* close_database(const string& logical_name);
+   op_database* close_database(const string& logical_name, bool update_database);
+
+   /// Close all open databases, all cached objects will be flushed to db (if update_database=true)
+   void close_all_databases(bool update_database);
 
    /// Cet pointer to open database with given logical name, fail if logical name does no exist
    /*! \param logical_name logical name of database
