@@ -1,35 +1,16 @@
-# op_lite
-A portable, lightweight object persistence library for C++
+﻿# cpde_syslibs
+system libraries common to several applications following the CPDE model
 
 ## Introduction
-The name op_lite stands for _Object Persistence – Lightweight_. It is a C++ library that offers automatic in-process object persistence, the application code never explicitly reads or writes to the database – it all happens behind the scenes, given that certain programming patterns are followed. This is similar to most other "real" OO databases. The effect is that the objects are perceived to “live in the database”.
+CPDE - Cross Platform Development Environment is a set of conventions and tools for building C++ software libraries
+and applications. The build system is based on Code::Blocks
 
-For more details see [the white paper](doc/op_lite_white_paper.odt).
+## Library synopsis
 
-# Build instructions
-op_lite comes with makefiles for Windows and Linux. For Windows the MSVC compiler is assumed. Tested for MSVC2013 Professional and Express versions.
+The follwing libraries are included
 
-## Dependencies
-op_lite requires boost (http://www.boost.org/ ) and msgpack-c ( https://msgpack.org/ )
-
-## Linux builds
-boost and msgpack-c are assumed to exit in `/usr/local`. If not, edit the Makefile entries for boost and msgpack-c to fit.
-
-<pre>
-git clone https://github.com/arnholm/op_lite
-cd op_lite
-make
-</pre>
-
-Shared object library generated in .cmp\gcc\bin\Release
-
-## Windows builds
-Open a MSVC command line build terminal, e.g. "VS2013 x64 Cross Tools Command Prompt". Edit Makefile.msvc and set entries for boost and msgpack-c to fit.
-
-<pre>
-git clone https://github.com/arnholm/op_lite
-cd op_lite
-nmake -f Makefile.msvc
-</pre>
-
-DLL and import library generated in .cmp\msvc\bin\Release
+| Library name          | Description                     |
+| --------------------- | ------------------------------  |
+| op_lite               |  A portable, lightweight object persistence library for C++ |
+| ce_angelscript        |  CPDE adaption of https://www.angelcode.com/angelscript/ |
+| ce_angelscript_ex     |  CPDE extension library to  Angelscript |
