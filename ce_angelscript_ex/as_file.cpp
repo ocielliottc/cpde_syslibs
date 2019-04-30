@@ -17,6 +17,7 @@
 #include "as_file.h"
 #ifdef _WIN32
    #include "Shlwapi.h"
+   #pragma comment (lib,"shlwapi.lib")
 #else
    #include <sys/stat.h>
 #endif
