@@ -1,5 +1,5 @@
 // BeginLicense:
-// Part of: angelcad - script based 3D solid modeller
+// Part of: cpde_syslibs - Cross Platform Development Environment, system libraries
 // Copyright (C) 2017 Carsten Arnholm
 // All rights reserved
 //

@@ -1,12 +1,29 @@
-#ifndef AS_INITIALIZER_LIST_H
-#define AS_INITIALIZER_LIST_H
+// BeginLicense:
+// Part of: cpde_syslibs - Cross Platform Development Environment, system libraries
+// Copyright (C) 2017 Carsten Arnholm
+// All rights reserved
+//
+// This file may be used under the terms of either the GNU General
+// Public License version 2 or 3 (at your option) as published by the
+// Free Software Foundation and appearing in the files LICENSE.GPL2
+// and LICENSE.GPL3 included in the packaging of this file.
+//
+// This file is provided "AS IS" with NO WARRANTY OF ANY KIND,
+// INCLUDING THE WARRANTIES OF DESIGN, MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE.
+// EndLicense:
+
+#ifndef AS_INITIALIZER_VECTOR_H
+#define AS_INITIALIZER_VECTOR_H
 
 #include <vector>
 #include <stdexcept>
 #include <string.h>
 #include "ce_angelscript/ce_angelscript.h"
 
-// basic initializer list for fundamental types, ilel T=double or int
+// basic initializer list encapsulation for fundamental types, i.e. T=double,int etc.
+// A scripting class can be declared with as_initializer_vector<T> as constructor parameter to simplify.
+// If the initializer list must be have a required length, use the first constructor
 
 template <class T>
 class as_initializer_vector {
@@ -27,8 +44,6 @@ public:
    // read only operator
    const T operator[](size_t index) const { return m_data[index]; }
 
-protected:
-
 private:
    std::vector<T> m_data;
 };
@@ -48,6 +63,8 @@ as_initializer_vector<T>::as_initializer_vector(size_t required_length, void* in
    for(size_t i=0;i<length;i++) {
       m_data.push_back(*value++);
    }
+
+   // zero the input list completely, this avoids segfault in angelscript later
    ::memset(((asUINT*)initlist), 0, 1+length*sizeof(T) );
 }
 
@@ -61,6 +78,8 @@ as_initializer_vector<T>::as_initializer_vector(void* initlist)
    for(size_t i=0;i<length;i++) {
       m_data.push_back(*value++);
    }
+
+   // zero the input list completely, this avoids segfault in angelscript later
    ::memset(((asUINT*)initlist), 0, 1+length*sizeof(T) );
 }
 
@@ -69,4 +88,4 @@ as_initializer_vector<T>::~as_initializer_vector()
 {}
 
 
-#endif // AS_INITIALIZER_LIST_H
+#endif // AS_INITIALIZER_VECTOR_H
