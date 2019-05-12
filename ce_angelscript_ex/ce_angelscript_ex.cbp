@@ -5,7 +5,7 @@
 		<Option title="ce_angelscript_ex" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
-		<Option virtualFolders="iostream/" />
+		<Option virtualFolders="iostream/;as_xml/" />
 		<Build>
 			<Target title="MSVC_Debug">
 				<Option output=".cmp/msvc/ce_angelscript_exd" prefix_auto="1" extension_auto="1" />
@@ -130,6 +130,30 @@
 		</Unit>
 		<Unit filename="as_assert.cpp" />
 		<Unit filename="as_assert.h" />
+		<Unit filename="as_class.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_class.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_constructor.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_constructor.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_description.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_description.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_doc.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_doc.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
 		<Unit filename="as_factory.cpp" />
 		<Unit filename="as_factory.h" />
 		<Unit filename="as_file.cpp" />
@@ -138,12 +162,38 @@
 		<Unit filename="as_include_callback.h" />
 		<Unit filename="as_initializer_vector.cpp" />
 		<Unit filename="as_initializer_vector.h" />
+		<Unit filename="as_line.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_line.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_member_function.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_member_function.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_parameter.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_parameter.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
 		<Unit filename="as_reftype.cpp" />
 		<Unit filename="as_reftype.h" />
+		<Unit filename="as_return.cpp" />
+		<Unit filename="as_return.h" />
 		<Unit filename="as_typeid.cpp" />
 		<Unit filename="as_typeid.h" />
 		<Unit filename="as_vector.cpp" />
 		<Unit filename="as_vector.h" />
+		<Unit filename="as_xml.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_xml.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
 		<Unit filename="ce_angelscript_ex_config.h" />
 		<Extensions>
 			<code_completion />
