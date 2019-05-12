@@ -9,7 +9,7 @@ as_doc::as_doc(cf_syslib::xml_node& node)
 : m_verified(node.get_property("verified",false))
 {
    cf_syslib::xml_node child;
-   if(node.get_child("description",child)) {
+   if(node.get_child("as_description",child)) {
       m_descr = std::make_shared<as_description>(child);
    }
 }

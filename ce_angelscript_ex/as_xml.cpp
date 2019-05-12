@@ -129,13 +129,12 @@ void as_xml::from_script_engine_constructors(asIScriptEngine* engine, asITypeInf
          std::shared_ptr<as_constructor> as_constr = class_type->lookup_constructor(signature,verified);
          if(!as_constr.get()) {
             as_constr = std::make_shared<as_constructor>(signature,verified);
+            class_type->add_constructor(as_constr);
          }
 
          // extract constructor parameters
          from_script_engine_parameters_constr(engine,func,as_constr);
 
-         // add constructor to class
-         class_type->add_constructor(as_constr);
      }
    }
 }
@@ -201,12 +200,11 @@ void as_xml::from_script_engine_member_functions(asIScriptEngine* engine, asITyp
         if(!as_mem_fun.get()) {
            std::string name = func->GetName();
            as_mem_fun = std::make_shared<as_member_function>(signature,name,verified);
+           class_type->add_member_function(as_mem_fun);
         }
 
         // extract function parameters and return type
         from_script_engine_parameters(engine,func,as_mem_fun);
-
-        class_type->add_member_function(as_mem_fun);
      }
    }
 }
