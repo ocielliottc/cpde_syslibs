@@ -7,6 +7,8 @@
 #include "as_member_function.h"
 #include "as_return.h"
 
+#include <iostream>
+
 static bool is_primitive_type(int idtype, std::string& type_name)
 {
    bool is_primitive = true;
@@ -97,6 +99,8 @@ void as_xml::from_script_engine(asIScriptEngine* engine)
             // create the as_class instance
             std::shared_ptr<as_description> descr;
             class_type = std::make_shared<as_class>(type_name,verified,descr);
+            m_types.insert(std::make_pair(type_name,class_type));
+
          }
 
          // add the class constructors
@@ -105,7 +109,6 @@ void as_xml::from_script_engine(asIScriptEngine* engine)
          // and member functions
          from_script_engine_member_functions(engine,type,class_type);
 
-         m_types.insert(std::make_pair(type_name,class_type));
       }
    }
 }
