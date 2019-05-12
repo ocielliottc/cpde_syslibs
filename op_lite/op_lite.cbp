@@ -5,7 +5,7 @@
 		<Option title="op_lite" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
-		<Option virtualFolders="sqLayer/;op_containers/;op_type_factory/;lzmalib_WIN_ONLY/;lzmalib/;" />
+		<Option virtualFolders="sqLayer/;op_containers/;op_type_factory/;lzmalib_WIN_ONLY/;lzmalib/" />
 		<Build>
 			<Target title="MSVC_Debug">
 				<Option output=".cmp/msvc/bin/Debug/op_lited" prefix_auto="0" extension_auto="1" />
