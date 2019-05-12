@@ -13,8 +13,10 @@ public:
    as_class(const std::string& name, bool verified, std::shared_ptr<as_description> descr);
    virtual ~as_class();
 
-   // look up constructor by type signature (may return null)
+   // look up constructor by type signature (may return null). Do not include return type in constructor signature
    std::shared_ptr<as_constructor>     lookup_constructor(const std::string& signature, bool verified);
+
+   // look up member function by type signature (may return null). Do include return type in signature
    std::shared_ptr<as_member_function> lookup_member_function(const std::string& signature, bool verified);
 
    // set name of base class
@@ -29,6 +31,8 @@ public:
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
    void unverify();
+
+   const std::map<std::string,std::shared_ptr<as_constructor>>&  constr() const { return m_constr; }
 
 private:
    std::string m_name;  // name of class

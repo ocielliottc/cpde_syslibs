@@ -22,10 +22,11 @@ as_parameter::~as_parameter()
 cf_syslib::xml_node as_parameter::to_xml(cf_syslib::xml_node& xml_parent)
 {
    cf_syslib::xml_node xml_this = xml_parent.add_child(as_typeid(this));
+   as_doc::to_xml(xml_this);
+
    xml_this.add_property("type",m_type);
    xml_this.add_property("name",m_name);
    if(m_defval.length()>0)xml_this.add_property("default",m_defval);
-   as_doc::to_xml(xml_this);
 
    return xml_this;
 }

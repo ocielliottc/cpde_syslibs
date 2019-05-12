@@ -47,11 +47,12 @@ std::string as_constructor::key() const
 cf_syslib::xml_node as_constructor::to_xml(cf_syslib::xml_node& xml_parent)
 {
    cf_syslib::xml_node xml_this = xml_parent.add_child(as_typeid(this));
+   as_doc::to_xml(xml_this);
+
    xml_this.add_property("signature",m_signature);
    for(auto& par : m_params) {
       par->to_xml(xml_this);
    }
-   as_doc::to_xml(xml_this);
 
    return xml_this;
 }

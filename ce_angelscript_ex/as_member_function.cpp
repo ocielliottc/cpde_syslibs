@@ -38,13 +38,14 @@ void as_member_function::add_return(std::shared_ptr<as_return> param)
 cf_syslib::xml_node as_member_function::to_xml(cf_syslib::xml_node& xml_parent)
 {
    cf_syslib::xml_node xml_this = xml_parent.add_child(as_typeid(this));
+   as_doc::to_xml(xml_this);
+
    xml_this.add_property("signature",m_signature);
    xml_this.add_property("name",m_name);
    for(auto& par : m_params) {
       par->to_xml(xml_this);
    }
    if(m_return.get())m_return->to_xml(xml_this);
-   as_doc::to_xml(xml_this);
 
    return xml_this;
 }

@@ -38,6 +38,8 @@ void as_class::add_member_function(std::shared_ptr<as_member_function> mfun)
 cf_syslib::xml_node as_class::to_xml(cf_syslib::xml_node& xml_parent)
 {
    cf_syslib::xml_node xml_this = xml_parent.add_child(as_typeid(this));
+   as_doc::to_xml(xml_this);
+
    xml_this.add_property("name",m_name);
    if(m_base.length() > 0)xml_this.add_property("base",m_base);
    for(auto& p : m_constr) {
@@ -48,7 +50,6 @@ cf_syslib::xml_node as_class::to_xml(cf_syslib::xml_node& xml_parent)
       auto& mfun = p.second;
       mfun->to_xml(xml_this);
    }
-   as_doc::to_xml(xml_this);
 
    return xml_this;
 }
@@ -57,7 +58,7 @@ cf_syslib::xml_node as_class::to_xml(cf_syslib::xml_node& xml_parent)
 std::shared_ptr<as_constructor> as_class::lookup_constructor(const std::string& signature, bool verified)
 {
    std::shared_ptr<as_constructor> constr;
-   auto it = m_constr.find(as_constructor::key(signature));
+   auto it = m_constr.find(as_member_function::key(signature));
    if(it != m_constr.end()) {
       constr = it->second;
       constr->set_verified(verified);
