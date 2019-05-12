@@ -4,6 +4,8 @@
 #ifdef _MSC_VER
 
    /// MSVC compiler
+   // disabling warning 4251 is the only practical way to deal with dll-export issues according to M$
+   #pragma warning (disable:4251) // class "XX" needs to have dll-interface to be used by clients of class "YY"
 
    #ifdef CF_SYSLIB_IMPLEMENTATION
       #define CF_SYSLIB_PUBLIC __declspec(dllexport)
@@ -21,11 +23,11 @@
    #define CF_SYSLIB_PUBLIC  __attribute__ ((visibility("default")))
    #define CF_SYSLIB_PRIVATE __attribute__ ((visibility("hidden")))
    #define CF_SYSLIB_EXTERN
-	
+
 #else
 
   #error "Unknown compiler"
-	
+
 #endif
 
 
