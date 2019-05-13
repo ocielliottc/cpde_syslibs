@@ -56,13 +56,9 @@ std::string get_type_name_by_id(asIScriptEngine* engine, int idtype, asDWORD mod
 }
 
 
-as_xml::as_xml()
+as_xml::as_xml(const std::string& appnam)
+: m_appnam(appnam)
 {}
-
-as_xml::as_xml(asIScriptEngine* engine)
-{
-   from_script_engine(engine);
-}
 
 as_xml::~as_xml()
 {}
@@ -280,6 +276,7 @@ void as_xml::write_xml(std::ostream& xml)
    if(tree.create_root("as_xml")) {
       cf_syslib::xml_node root;
       if(tree.get_root(root)) {
+         root.add_property("appnam",m_appnam);
          for(auto& p : m_types) {
             std::shared_ptr<as_class> type = p.second;
             type->to_xml(root);
@@ -296,6 +293,7 @@ void as_xml::read_xml(std::istream& xml)
    if(tree.read_xml(xml)) {
       cf_syslib::xml_node root;
       if(tree.get_root(root) && root.tag()=="as_xml") {
+         m_appnam = root.get_property("appnam",m_appnam);
          for(auto i=root.begin(); i!=root.end(); i++) {
             cf_syslib::xml_node node(i);
             if(node.tag()=="as_class") {

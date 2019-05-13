@@ -12,8 +12,7 @@ class as_class;
 
 class as_xml {
 public:
-   as_xml();
-   as_xml(asIScriptEngine* engine);
+   as_xml(const std::string& appnam);
    virtual ~as_xml();
 
    // unverify all contents
@@ -46,6 +45,7 @@ protected:
    void from_script_engine_parameters(asIScriptEngine* engine, asIScriptFunction* func, std::shared_ptr<as_member_function> as_mem_fun);
 
 private:
+   std::string                                     m_appnam; // name of application
    std::map<std::string,std::shared_ptr<as_class>> m_types;  // using a map, we get alphabetic sorting
 };
 
