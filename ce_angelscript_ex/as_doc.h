@@ -15,14 +15,14 @@ public:
    as_doc(cf_syslib::xml_node& node);
    virtual ~as_doc();
 
+   // unverify this object and all descendants
+   virtual void unverify() = 0;
+
    // provide read & write access to description
    std::shared_ptr<as_description> description() { return m_descr; }
 
    // set verification flag
    void set_verified(bool verified = true) { m_verified = verified; }
-
-   // inverify this object and all descendants
-   virtual void unverify() = 0;
 
    // set new description
    void set_description(std::shared_ptr<as_description> descr) { m_descr = descr; }

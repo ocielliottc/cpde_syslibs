@@ -25,14 +25,14 @@ void as_constructor::add_parameter(std::shared_ptr<as_parameter> param)
    m_params.push_back(param);
 }
 
-std::string as_constructor::key(const std::string& signature)
+std::string as_constructor::key(size_t istart, const std::string& signature)
 {
    std::string key_sig;
    std::vector<std::string> tokens;
    as_description::tokenize(signature," ",tokens);
 
    // skip the 1st token, the return type
-   for(size_t i=1;i<tokens.size();i++) {
+   for(size_t i=istart;i<tokens.size();i++) {
       key_sig+=tokens[i];
    }
    return key_sig;
@@ -40,7 +40,7 @@ std::string as_constructor::key(const std::string& signature)
 
 std::string as_constructor::key() const
 {
-   return key(m_signature);
+   return key(1,m_signature);
 }
 
 

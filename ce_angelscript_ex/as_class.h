@@ -13,6 +13,9 @@ public:
    as_class(const std::string& name, bool verified, std::shared_ptr<as_description> descr);
    virtual ~as_class();
 
+   // unverify this class and all descendants
+   void unverify();
+
    // look up constructor by type signature (may return null). Do not include return type in constructor signature
    std::shared_ptr<as_constructor>     lookup_constructor(const std::string& signature, bool verified);
 
@@ -29,8 +32,6 @@ public:
    void add_member_function(std::shared_ptr<as_member_function> mfun);
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
-
-   void unverify();
 
    const std::map<std::string,std::shared_ptr<as_constructor>>&  constr() const { return m_constr; }
 

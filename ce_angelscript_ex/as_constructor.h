@@ -10,6 +10,12 @@ public:
    as_constructor(const std::string& signature, bool verified,  std::shared_ptr<as_description> descr = 0);
    virtual ~as_constructor();
 
+   // unverify this constructor and all descendants
+   void unverify();
+
+   // return raw signature as defined by asIScriptFunction::GetDeclaration
+   std::string  signature() const { return m_signature; }
+
    // find a parameter by index (may return 0)
    std::shared_ptr<as_parameter> lookup_parameter(size_t index);
 
@@ -20,14 +26,12 @@ public:
    size_t size() const { return m_params.size(); }
 
    // compute key from signature
-   static std::string key(const std::string& signature);
+   static std::string key(size_t istart, const std::string& signature);
 
    // add constructor parameter
    void add_parameter(std::shared_ptr<as_parameter> param);
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
-
-   void unverify();
 
 private:
    std::string                                m_signature; // angelscript signature as returned by asIScriptFunction::GetDeclaration

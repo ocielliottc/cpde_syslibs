@@ -234,8 +234,10 @@ as_factory::as_factory()
 void as_factory::SetLibraryIncludePath(const string& path)
 {
    m_library_path = path;
-   const char c = m_library_path[m_library_path.length()-1];
-   if(c != '/' && c != '\\') m_library_path += '/';
+   if(m_library_path.length() > 0) {
+      const char c = m_library_path[m_library_path.length()-1];
+      if(c != '/' && c != '\\') m_library_path += '/';
+   }
 
    std::replace(m_library_path.begin(),m_library_path.end(),'\\','/');
 }

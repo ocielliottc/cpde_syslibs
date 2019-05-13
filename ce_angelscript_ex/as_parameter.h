@@ -10,15 +10,18 @@ public:
    as_parameter(const std::string& type, const std::string& name, const std::string& defval,  bool verified, std::shared_ptr<as_description> descr = 0);
    virtual ~as_parameter();
 
+   // unverify this parameter and all descendants
+   void unverify();
+
    void set_name(const std::string& name) { m_name = name; }
    void set_type(const std::string& type) { m_type = type; }
    void set_defval(const std::string& defval) { m_defval = defval; }
 
+   std::string type() const { return m_type; }
    std::string name() const { return m_name; }
+   std::string defval() const { return m_defval; }
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
-
-   void unverify();
 
 private:
    std::string m_type;    // type name of parameter, e.g. "double"

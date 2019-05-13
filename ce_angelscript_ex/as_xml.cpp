@@ -87,7 +87,6 @@ std::shared_ptr<as_class> as_xml::lookup_class(const std::string& type_name, boo
 
 void as_xml::from_script_engine(asIScriptEngine* engine)
 {
-   m_types.clear();
    asUINT ntypes = engine->GetObjectTypeCount();
    for(asUINT itype=0; itype<ntypes; itype++) {
       if(asITypeInfo* type = engine->GetObjectTypeByIndex(itype)) {
@@ -129,7 +128,7 @@ void as_xml::from_script_engine_constructors(asIScriptEngine* engine, asITypeInf
          bool includeParamNames=true;
          std::string signature = func->GetDeclaration(includeObjectName,includeNamespace,includeParamNames);
 
-         std::shared_ptr<as_constructor> as_constr = class_type->lookup_constructor(signature,verified);
+         std::shared_ptr<as_constructor> as_constr = class_type->lookup_constructor(as_constructor::key(1,signature),verified);
          if(!as_constr.get()) {
             as_constr = std::make_shared<as_constructor>(signature,verified);
             class_type->add_constructor(as_constr);
@@ -150,7 +149,10 @@ void as_xml::from_script_engine_parameters_constr(asIScriptEngine* engine, asISc
    asUINT npar = func->GetParamCount();
 
    size_t npar_constr = as_constr->size();
-   if(npar_constr>0 && npar_constr != npar) throw std::logic_error("from_script_engine_parameters_constr - parameter count mismatch");
+   if(npar_constr>0 && npar_constr != npar) {
+      std::cout << " warning, parameter mismatch: " << as_constr->signature() << std::endl;
+   }
+
 
    for(asUINT ipar=0; ipar<npar; ipar++) {
       int idtype=0;                      // this identifies either a primitive type or an object type
@@ -162,7 +164,7 @@ void as_xml::from_script_engine_parameters_constr(asIScriptEngine* engine, asISc
       if(func->GetParam(ipar,&idtype,&flags,&name,&defarg) >= 0) {
 
          bool verified=true;
-         if(name && strlen(name)>0) {
+         if(idtype>0) {
             std::string par_name(name);
             std::string par_def;
             if(defarg)par_def = std::string(defarg);
@@ -199,7 +201,7 @@ void as_xml::from_script_engine_member_functions(asIScriptEngine* engine, asITyp
         bool includeNamespace=false;
         bool includeParamNames=true;
         std::string signature = func->GetDeclaration(includeObjectName,includeNamespace,includeParamNames);
-        std::shared_ptr<as_member_function> as_mem_fun = class_type->lookup_member_function(signature,verified);
+        std::shared_ptr<as_member_function> as_mem_fun = class_type->lookup_member_function(as_member_function::key(signature),verified);
         if(!as_mem_fun.get()) {
            std::string name = func->GetName();
            as_mem_fun = std::make_shared<as_member_function>(signature,name,verified);
@@ -219,7 +221,9 @@ void as_xml::from_script_engine_parameters(asIScriptEngine* engine, asIScriptFun
    asUINT npar = func->GetParamCount();
 
    size_t npar_fun = as_mem_fun->size();
-   if(npar_fun>0 && npar_fun != npar) throw std::logic_error("from_script_engine_parameters - parameter count mismatch");
+   if(npar_fun>0 && npar_fun != npar) {
+      std::cout << " warning, parameter mismatch: " << as_mem_fun->signature() << std::endl;
+   }
 
    for(asUINT ipar=0; ipar<npar; ipar++) {
       int idtype=0;                      // this identifies either a primitive type or an object type
@@ -231,7 +235,7 @@ void as_xml::from_script_engine_parameters(asIScriptEngine* engine, asIScriptFun
       if(func->GetParam(ipar,&idtype,&flags,&name,&defarg) >= 0) {
 
          bool verified=true;
-         if(name && strlen(name)>0) {
+         if(idtype>0) {
             std::string par_name(name);
             std::string par_def;
             if(defarg)par_def = std::string(defarg);
