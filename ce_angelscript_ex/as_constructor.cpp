@@ -74,19 +74,23 @@ void as_constructor::unverify()
 
 void as_constructor::write_header(std::ostream& hfile)
 {
-   std::vector<std::string> lines;
    if(auto descr = description()) {
-      for(size_t i=0; i<descr->size(); i++) lines.push_back(descr->line(i).text());
+      for(size_t i=0; i<descr->size(); i++) hfile << "   /// " << descr->line(i).text() << std::endl;
    }
 
+   std::vector<std::string> lines;
    for(auto& par : m_params) {
       lines.push_back(par->doxy_string());
    }
 
    if(lines.size() > 0) {
-      hfile << "   /*" << std::endl;
-      for(auto& l : lines) hfile << "   " << l << std::endl;
-      hfile << "   */" << std::endl;
+      for(size_t i=0; i<lines.size(); i++) {
+         if(i==0) hfile << "   /*! ";
+         else     hfile << "   ";
+         hfile << lines[i];
+         if(i==lines.size()-1) hfile << " */";
+         hfile << std::endl;
+      }
    }
    size_t ipos = m_signature.find(' ');
    hfile << "  " << m_signature.substr(ipos) << ';' << std::endl;

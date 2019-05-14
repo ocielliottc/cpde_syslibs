@@ -138,6 +138,7 @@ void as_class::write_header(std::ostream& hfile)
    hfile << "class " << m_name;
    if(m_base.length()>0) hfile << " : public " << m_base;
    hfile << " {" << std::endl;
+   hfile << "public:" << std::endl;
    for(auto& p : m_constr) {
       auto& constr = p.second;
       constr->write_header(hfile);

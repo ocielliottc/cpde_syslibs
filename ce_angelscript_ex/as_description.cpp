@@ -70,10 +70,13 @@ void as_description::tokenize(const std::string& input,
 void as_description::write_header(std::ostream& hfile)
 {
    if(m_lines.size()>0) {
-      hfile << "/* " << std::endl;
-      for(size_t i=0; i<m_lines.size(); i++) {
-         hfile << ' ' << m_lines[i].text() << std::endl;
+      hfile << "/// " << m_lines[0].text() << std::endl;
+      if(m_lines.size()>1) {
+         hfile << "/* " << std::endl;
+         for(size_t i=1; i<m_lines.size(); i++) {
+            hfile << ' ' << m_lines[i].text() << std::endl;
+         }
+         hfile << "*/ " << std::endl;
       }
-      hfile << "*/ " << std::endl;
    }
 }
