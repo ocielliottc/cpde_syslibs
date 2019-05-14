@@ -44,6 +44,8 @@ protected:
    void from_script_engine_member_functions(asIScriptEngine* engine, asITypeInfo* type, std::shared_ptr<as_class> class_type);
    void from_script_engine_parameters(asIScriptEngine* engine, asIScriptFunction* func, std::shared_ptr<as_member_function> as_mem_fun);
 
+   void resolve_base_types();
+
 private:
    std::string                                     m_appnam; // name of application
    std::map<std::string,std::shared_ptr<as_class>> m_types;  // using a map, we get alphabetic sorting

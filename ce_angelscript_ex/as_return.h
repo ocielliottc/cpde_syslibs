@@ -11,6 +11,7 @@ public:
    virtual ~as_return();
 
    void set_type(const std::string& type) { m_type = type; }
+   std::string type() const { return m_type; }
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 

@@ -106,6 +106,9 @@ void as_xml::from_script_engine(asIScriptEngine* engine)
 
       }
    }
+
+   // finally resolve the base type so we get a class hierarchy
+   resolve_base_types();
 }
 
 void as_xml::from_script_engine_constructors(asIScriptEngine* engine, asITypeInfo* type, std::shared_ptr<as_class> class_type)
@@ -206,6 +209,15 @@ void as_xml::from_script_engine_member_functions(asIScriptEngine* engine, asITyp
 
         // extract function parameters and return type
         from_script_engine_parameters(engine,func,as_mem_fun);
+
+        // If we can implicitly cast to a type, we understand that type as a potential base class,
+        // either directly or indirectly. We save all the candidates hare for resolution later
+        std::string func_name = func->GetName();
+        if("opImplCast" == func_name) {
+           // get the type of the return value and add it as candidate base type to this class
+           std::shared_ptr<as_return> ret = as_mem_fun->lookup_return();
+           class_type->add_base_candidate(ret->type());
+        }
      }
    }
 }
@@ -266,6 +278,20 @@ void as_xml::from_script_engine_parameters(asIScriptEngine* engine, asIScriptFun
    else {
       bool verified=true;
       as_mem_fun->add_return(std::make_shared<as_return>(return_type_name,verified));
+   }
+}
+
+void as_xml::resolve_base_types()
+{
+   bool resolved = false;
+   while(!resolved){
+
+      size_t ncount = 0;
+      for(auto i=m_types.begin(); i!= m_types.end(); i++) {
+         std::shared_ptr<as_class> type = i->second;
+         if(!type->resolve_base_type(this))ncount++;
+      }
+      resolved = (ncount==0);
    }
 }
 

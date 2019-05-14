@@ -1,6 +1,7 @@
 #include "as_class.h"
 #include "as_constructor.h"
 #include "as_member_function.h"
+#include "as_xml.h"
 
 as_class::as_class(cf_syslib::xml_node& node)
 : as_doc(node)
@@ -86,4 +87,45 @@ void as_class::unverify()
    for(auto& p : m_mem_funs) {
       (p.second)->unverify();
    }
+}
+
+void as_class::add_base_candidate(std::string base_type)
+{
+   // strip away possible @ at the end
+   size_t ipos = base_type.find_first_of('@');
+   if(ipos != std::string::npos) base_type =  base_type.substr(0,ipos);
+   m_base_candidates.insert(base_type);
+}
+
+bool as_class::has_unique_base_type(const std::string& base_type)
+{
+   return ((m_base_candidates.size()==1) && (m_base_candidates.find(base_type) != m_base_candidates.end()) );
+}
+
+
+bool as_class::resolve_base_type(as_xml* factory)
+{
+   m_base = "";
+   for(auto i=m_base_candidates.begin(); i!=m_base_candidates.end(); i++) {
+      const std::string& base_type = *i;
+      std::shared_ptr<as_class> base_candidate = factory->lookup_class(base_type,true);
+      if(base_candidate.get()) {
+
+         for(auto j=m_base_candidates.begin(); j!=m_base_candidates.end(); j++) {
+            const std::string& base_type_other = *j;
+            if(base_candidate->has_unique_base_type(base_type_other)) {
+               m_base_candidates.erase(j);
+               j=m_base_candidates.begin();
+            }
+         }
+      }
+      else {
+         m_base_candidates.erase(i);
+         i = m_base_candidates.begin();
+      }
+   }
+
+   if(m_base_candidates.size()==1) m_base = *m_base_candidates.begin();
+
+   return (m_base_candidates.size() < 2);
 }

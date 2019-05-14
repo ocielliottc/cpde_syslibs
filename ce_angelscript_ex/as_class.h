@@ -3,8 +3,10 @@
 
 #include "as_doc.h"
 #include <map>
+#include <set>
 class as_constructor;
 class as_member_function;
+class as_xml;
 
 // as_class represents a complete scripting class
 class as_class : public as_doc {
@@ -35,12 +37,20 @@ public:
 
    const std::map<std::string,std::shared_ptr<as_constructor>>&  constr() const { return m_constr; }
 
+   void add_base_candidate(std::string base_type);
+   bool resolve_base_type(as_xml* factory);
+
+protected:
+   bool has_unique_base_type(const std::string& base_type);
+
 private:
    std::string m_name;  // name of class
    std::string m_base;  // name of base class or empty string if none
 
    std::map<std::string,std::shared_ptr<as_constructor>>     m_constr;     // key = as_constructor::key()
    std::map<std::string,std::shared_ptr<as_member_function>> m_mem_funs;   // key = as_member_function::key()
+
+   std::set<std::string> m_base_candidates; // only used temporarily during script engine processing
 };
 
 #endif // AS_CLASS_H
