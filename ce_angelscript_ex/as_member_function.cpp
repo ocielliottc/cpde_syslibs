@@ -83,3 +83,25 @@ void as_member_function::unverify()
    }
    if(m_return.get())m_return->unverify();
 }
+
+
+void as_member_function::write_header(std::ostream& hfile)
+{
+   std::vector<std::string> lines;
+   if(auto descr = description()) {
+      for(size_t i=0; i<descr->size(); i++) lines.push_back(descr->line(i).text());
+   }
+
+   for(auto& par : m_params) {
+      lines.push_back(par->doxy_string());
+   }
+   std::string ret = m_return->doxy_string();
+   if(ret.length()>0)lines.push_back(ret);
+
+   if(lines.size() > 0) {
+      hfile << "   /*" << std::endl;
+      for(auto& l : lines) hfile << "   " << l << std::endl;
+      hfile << "   */" << std::endl;
+   }
+   hfile << "  " << m_signature << ';' << std::endl;
+}

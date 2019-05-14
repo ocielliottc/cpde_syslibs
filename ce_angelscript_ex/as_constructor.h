@@ -33,6 +33,8 @@ public:
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   void write_header(std::ostream& hfile);
+
 private:
    std::string                                m_signature; // angelscript signature as returned by asIScriptFunction::GetDeclaration
    std::vector<std::shared_ptr<as_parameter>> m_params;

@@ -12,6 +12,8 @@ public:
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   const std::string& text() const { return m_text; }
+
 private:
    std::string m_text;
 };

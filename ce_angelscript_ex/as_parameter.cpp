@@ -36,3 +36,11 @@ void as_parameter::unverify()
 {
    set_verified(false);
 }
+
+
+std::string as_parameter::doxy_string()
+{
+   std::string txt = " \\param " + m_name + ' ' + m_type;
+   if(auto descr = description()) txt += ", " + descr->line(0).text();
+   return txt;
+}

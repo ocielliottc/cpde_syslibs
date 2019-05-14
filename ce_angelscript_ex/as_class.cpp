@@ -129,3 +129,23 @@ bool as_class::resolve_base_type(as_xml* factory)
 
    return (m_base_candidates.size() < 2);
 }
+
+
+void as_class::write_header(std::ostream& hfile)
+{
+   hfile << std::endl;
+   if(auto descr = description())descr->write_header(hfile);
+   hfile << "class " << m_name;
+   if(m_base.length()>0) hfile << " : public " << m_base;
+   hfile << " {" << std::endl;
+   for(auto& p : m_constr) {
+      auto& constr = p.second;
+      constr->write_header(hfile);
+   }
+   for(auto& p : m_mem_funs) {
+      auto& mfun = p.second;
+      mfun->write_header(hfile);
+   }
+
+   hfile << "};" << std::endl;
+}

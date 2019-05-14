@@ -1,6 +1,7 @@
 #include "as_description.h"
 #include "ce_angelscript_ex/as_typeid.h"
 #include "as_doc.h"
+#include <ostream>
 
 as_description::as_description(cf_syslib::xml_node& node)
 {
@@ -63,5 +64,16 @@ void as_description::tokenize(const std::string& input,
          if(pos-last_pos > 0)tokens.push_back(input.substr(last_pos, pos - last_pos));
          last_pos = pos + 1;
       }
+   }
+}
+
+void as_description::write_header(std::ostream& hfile)
+{
+   if(m_lines.size()>0) {
+      hfile << "/* " << std::endl;
+      for(size_t i=0; i<m_lines.size(); i++) {
+         hfile << ' ' << m_lines[i].text() << std::endl;
+      }
+      hfile << "*/ " << std::endl;
    }
 }

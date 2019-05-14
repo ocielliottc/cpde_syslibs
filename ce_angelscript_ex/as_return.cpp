@@ -28,3 +28,12 @@ void as_return::unverify()
 {
    set_verified(false);
 }
+
+
+std::string as_return::doxy_string()
+{
+   if(m_type == "void")return "";
+   std::string txt = " \\return " + m_type;
+   if(auto descr = description()) txt += ", " + descr->line(0).text();
+   return txt;
+}

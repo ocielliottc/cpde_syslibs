@@ -17,6 +17,8 @@ public:
 
    void unverify();
 
+   std::string doxy_string();
+
 private:
    std::string m_type;    // type name of parameter, e.g. "double"
 };

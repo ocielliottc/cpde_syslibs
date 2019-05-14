@@ -15,6 +15,8 @@ public:
    as_xml(const std::string& appnam);
    virtual ~as_xml();
 
+   std::string appnam() const { return m_appnam; }
+
    // unverify all contents
    void unverify();
 
@@ -33,6 +35,9 @@ public:
 
    // read from xml stream
    void read_xml(std::istream& xml);
+
+   // write header file to be readable by doxygen
+   void write_header(std::ostream& hfile);
 
 protected:
 

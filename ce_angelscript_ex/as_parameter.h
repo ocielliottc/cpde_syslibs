@@ -23,6 +23,8 @@ public:
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   std::string doxy_string();
+
 private:
    std::string m_type;    // type name of parameter, e.g. "double"
    std::string m_name;    // parameter name

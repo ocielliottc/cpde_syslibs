@@ -40,6 +40,8 @@ public:
    void add_base_candidate(std::string base_type);
    bool resolve_base_type(as_xml* factory);
 
+   void write_header(std::ostream& hfile);
+
 protected:
    bool has_unique_base_type(const std::string& base_type);
 

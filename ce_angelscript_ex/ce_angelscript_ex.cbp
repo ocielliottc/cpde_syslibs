@@ -182,8 +182,12 @@
 		</Unit>
 		<Unit filename="as_reftype.cpp" />
 		<Unit filename="as_reftype.h" />
-		<Unit filename="as_return.cpp" />
-		<Unit filename="as_return.h" />
+		<Unit filename="as_return.cpp">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_return.h">
+			<Option virtualFolder="as_xml/" />
+		</Unit>
 		<Unit filename="as_typeid.cpp" />
 		<Unit filename="as_typeid.h" />
 		<Unit filename="as_vector.cpp" />
