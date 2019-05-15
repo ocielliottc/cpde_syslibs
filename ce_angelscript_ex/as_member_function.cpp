@@ -106,5 +106,18 @@ void as_member_function::write_header(std::ostream& hfile)
       }
    }
 
-   hfile << "  " << m_signature << ';' << std::endl << std::endl;
+   // doxygen is not able to handle angelscript handles on return values,
+   // so instead we fake it by writing it as a C++ pointer
+   // and later do a global replace from * to @ in the henerated HTML files.
+   // Linux:
+   //    rpl  " *&#160;" "@&#160;" *.html
+   //
+   // more or less: replace " * " with "@ "
+   //
+   size_t ipos = m_signature.find(' ');
+   std::string return_type = m_signature.substr(0,ipos);
+   size_t ip_ref = return_type.find("@");
+   if(ip_ref != std::string::npos)return_type[ip_ref]='*';
+
+   hfile << "  " << return_type << ' ' << m_signature.substr(ipos) << ';' << std::endl << std::endl;
 }
