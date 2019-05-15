@@ -70,13 +70,16 @@ void as_description::tokenize(const std::string& input,
 void as_description::write_header(std::ostream& hfile)
 {
    if(m_lines.size()>0) {
-      hfile << "/// " << m_lines[0].text() << std::endl;
+      // first line has special meaning as "one liner"
+      hfile << "   /// " << m_lines[0].text() << std::endl;
       if(m_lines.size()>1) {
-         hfile << "/* " << std::endl;
+         size_t last_line = m_lines.size()-1;
          for(size_t i=1; i<m_lines.size(); i++) {
-            hfile << ' ' << m_lines[i].text() << std::endl;
+            if(i==        1) hfile << "   /*! " << m_lines[i].text();
+            else             hfile << "   \\n " << m_lines[i].text();
+            if(i==last_line) hfile << " */";
+            hfile << std::endl;
          }
-         hfile << "*/ " << std::endl;
       }
    }
 }

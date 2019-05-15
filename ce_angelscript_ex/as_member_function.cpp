@@ -87,9 +87,7 @@ void as_member_function::unverify()
 
 void as_member_function::write_header(std::ostream& hfile)
 {
-   if(auto descr = description()) {
-      for(size_t i=0; i<descr->size(); i++) hfile << "   /// " << descr->line(i).text() << std::endl;
-   }
+   if(auto descr = description())  descr->write_header(hfile);
 
    std::vector<std::string> lines;
    for(auto& par : m_params) {
@@ -99,13 +97,14 @@ void as_member_function::write_header(std::ostream& hfile)
    if(ret.length()>0)lines.push_back(ret);
 
    if(lines.size() > 0) {
+      size_t last_line = lines.size()-1;
       for(size_t i=0; i<lines.size(); i++) {
-         if(i==0) hfile << "   /*! ";
-         else     hfile << "   ";
-         hfile << lines[i];
-         if(i==lines.size()-1) hfile << " */";
+         if(i==        0) hfile << "   /*! " << lines[i];
+         else             hfile << "   \\n " << lines[i];
+         if(i==last_line) hfile << " */";
          hfile << std::endl;
       }
    }
-   hfile << "  " << m_signature << ';' << std::endl;
+
+   hfile << "  " << m_signature << ';' << std::endl << std::endl;
 }
