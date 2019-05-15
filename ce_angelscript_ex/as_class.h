@@ -40,7 +40,10 @@ public:
    void add_base_candidate(std::string base_type);
    bool resolve_base_type(as_xml* factory);
 
-   void write_header(std::ostream& hfile);
+   // return true if the function signature was inherited
+   bool function_inherited(as_xml* factory, std::shared_ptr<as_member_function> mfun);
+
+   void write_header(as_xml* factory, std::ostream& hfile);
 
    static void add_export_filter(const std::string& type_name) { m_export_filter.insert(type_name); }
 

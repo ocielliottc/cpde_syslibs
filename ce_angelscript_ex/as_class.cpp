@@ -133,7 +133,7 @@ bool as_class::resolve_base_type(as_xml* factory)
 }
 
 
-void as_class::write_header(std::ostream& hfile)
+void as_class::write_header(as_xml* factory, std::ostream& hfile)
 {
    if(m_export_filter.find(m_name) == m_export_filter.end()) {
 
@@ -149,9 +149,26 @@ void as_class::write_header(std::ostream& hfile)
       }
       for(auto& p : m_mem_funs) {
          auto& mfun = p.second;
-         mfun->write_header(hfile);
+
+         // check if this function was inherited.
+         // only export functions that were not inherited
+         if(!function_inherited(factory,mfun)) {
+            mfun->write_header(hfile);
+         }
       }
 
       hfile << "};" << std::endl;
    }
+}
+
+
+bool as_class::function_inherited(as_xml* factory, std::shared_ptr<as_member_function> mfun)
+{
+   // look up base class
+   if(auto base_type = factory->lookup_class(m_base,true)) {
+      if(auto base_member = base_type->lookup_member_function(mfun->signature(),true)) {
+         return true;
+      }
+   }
+   return false;
 }

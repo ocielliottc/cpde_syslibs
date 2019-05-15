@@ -346,6 +346,6 @@ void as_xml::write_header(std::ostream& hfile)
 
    for(auto& p : m_types) {
       std::shared_ptr<as_class> type = p.second;
-      type->write_header(hfile);
+      type->write_header(this, hfile);
    }
 }
