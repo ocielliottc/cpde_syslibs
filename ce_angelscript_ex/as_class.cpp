@@ -3,6 +3,8 @@
 #include "as_member_function.h"
 #include "as_xml.h"
 
+std::set<std::string> as_class::m_export_filter;
+
 as_class::as_class(cf_syslib::xml_node& node)
 : as_doc(node)
 {
@@ -133,20 +135,23 @@ bool as_class::resolve_base_type(as_xml* factory)
 
 void as_class::write_header(std::ostream& hfile)
 {
-   hfile << std::endl;
-   if(auto descr = description())descr->write_header(hfile);
-   hfile << "class " << m_name;
-   if(m_base.length()>0) hfile << " : public " << m_base;
-   hfile << " {" << std::endl;
-   hfile << "public:" << std::endl;
-   for(auto& p : m_constr) {
-      auto& constr = p.second;
-      constr->write_header(hfile);
-   }
-   for(auto& p : m_mem_funs) {
-      auto& mfun = p.second;
-      mfun->write_header(hfile);
-   }
+   if(m_export_filter.find(m_name) == m_export_filter.end()) {
 
-   hfile << "};" << std::endl;
+      hfile << std::endl;
+      if(auto descr = description())descr->write_header(hfile);
+      hfile << "class " << m_name;
+      if(m_base.length()>0) hfile << " : public " << m_base;
+      hfile << " {" << std::endl;
+      hfile << "public:" << std::endl;
+      for(auto& p : m_constr) {
+         auto& constr = p.second;
+         constr->write_header(hfile);
+      }
+      for(auto& p : m_mem_funs) {
+         auto& mfun = p.second;
+         mfun->write_header(hfile);
+      }
+
+      hfile << "};" << std::endl;
+   }
 }

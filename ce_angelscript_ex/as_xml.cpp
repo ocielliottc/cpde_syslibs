@@ -332,6 +332,18 @@ void as_xml::read_xml(std::istream& xml)
 
 void as_xml::write_header(std::ostream& hfile)
 {
+   as_class::add_export_filter("aatc_funcpointer");
+   as_class::add_export_filter("unordered_map");
+   as_class::add_export_filter("unordered_map_iterator");
+   as_class::add_export_filter("dictionary");
+   as_class::add_export_filter("dictionaryValue");
+   as_class::add_export_filter("as_reftype");
+
+   as_member_function::add_export_filter("opImplCast");
+   as_member_function::add_export_filter("opCast");
+   as_member_function::add_export_filter("Type");
+   as_member_function::add_export_filter("Refcount");
+
    for(auto& p : m_types) {
       std::shared_ptr<as_class> type = p.second;
       type->write_header(hfile);

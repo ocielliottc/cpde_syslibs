@@ -3,6 +3,7 @@
 #include "as_doc.h"
 #include "as_parameter.h"
 #include "as_return.h"
+#include <set>
 
 // as_member_function is a member function of a class
 class as_member_function : public as_doc {
@@ -37,11 +38,15 @@ public:
 
    void write_header(std::ostream& hfile);
 
+   static void add_export_filter(const std::string& func_name) { m_export_filter.insert(func_name); }
+
 private:
    std::string                                m_signature;  // angelscript signature as returned by asIScriptFunction::GetDeclaration
    std::string                                m_name;       // angelscript name returned by asIScriptFunction::GetName
    std::vector<std::shared_ptr<as_parameter>> m_params;
    std::shared_ptr<as_return>                 m_return;
+
+   static std::set<std::string>               m_export_filter; // names of functions that shall not be exported to header file
 };
 
 #endif // AS_MEMBER_FUNCTION_H

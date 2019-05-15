@@ -42,6 +42,8 @@ public:
 
    void write_header(std::ostream& hfile);
 
+   static void add_export_filter(const std::string& type_name) { m_export_filter.insert(type_name); }
+
 protected:
    bool has_unique_base_type(const std::string& base_type);
 
@@ -53,6 +55,7 @@ private:
    std::map<std::string,std::shared_ptr<as_member_function>> m_mem_funs;   // key = as_member_function::key()
 
    std::set<std::string> m_base_candidates; // only used temporarily during script engine processing
+   static std::set<std::string> m_export_filter;  // names of classes that shall not be exported to header file
 };
 
 #endif // AS_CLASS_H
