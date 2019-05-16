@@ -7,6 +7,8 @@
 #include "as_member_function.h"
 #include "as_return.h"
 
+#include "as_reftype.h"
+
 #include <iostream>
 
 static bool is_primitive_type(int idtype, std::string& type_name)
@@ -92,7 +94,14 @@ void as_xml::from_script_engine(asIScriptEngine* engine)
          auto class_type = lookup_class(type_name,verified);
          if(!class_type.get()) {
             // create the as_class instance
+
             std::shared_ptr<as_description> descr;
+            // as_reftype  has a built in type description text ....
+            std::string type_descr = as_reftype::decl_get_description(type_name);
+            if(type_descr.length() > 0) {
+               descr = std::make_shared<as_description>(type_descr);
+            }
+
             class_type = std::make_shared<as_class>(type_name,verified,descr);
             m_types.insert(std::make_pair(type_name,class_type));
 
