@@ -25,6 +25,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.debug) --iso --libs`" />
@@ -55,6 +56,7 @@
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe  --prefix=$(#wx) --wxcfg=$(#wx.release) --iso --libs`" />
@@ -83,6 +85,7 @@
 					<Add option="-fexceptions" />
 					<Add option="-D_DEBUG" />
 					<Add option="-g" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -106,6 +109,7 @@
 					<Add option="-fexceptions" />
 					<Add option="-Os" />
 					<Add option="-DNOPCH" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -128,6 +132,8 @@
 		</Linker>
 		<Unit filename="cf_syslib.cbp" />
 		<Unit filename="cf_syslib_config.h" />
+		<Unit filename="replace_substring.cpp" />
+		<Unit filename="replace_substring.h" />
 		<Unit filename="xml_node.cpp" />
 		<Unit filename="xml_node.h" />
 		<Unit filename="xml_tree.cpp" />
