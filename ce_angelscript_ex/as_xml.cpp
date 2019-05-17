@@ -8,8 +8,10 @@
 #include "as_return.h"
 
 #include "as_reftype.h"
+#include "cf_syslib/replace_substring.h"
 
 #include <iostream>
+
 
 static bool is_primitive_type(int idtype, std::string& type_name)
 {
@@ -55,6 +57,20 @@ std::string get_type_name_by_id(asIScriptEngine* engine, int idtype, asDWORD mod
       is_primitive_type(idtype,type_name);
    }
    return type_name;
+}
+
+
+std::set<std::string>  as_xml::m_array_types;
+
+std::string as_xml::fix_array_types(const std::string& signature)
+{
+   std::string signature_copy(signature);
+   for(const auto& array_type : m_array_types) {
+      std::string old_string = array_type+"[]";
+      std::string new_string = "array<"+array_type+">";
+      replace_substring(signature_copy,old_string,new_string);
+   }
+   return std::move(signature_copy);
 }
 
 

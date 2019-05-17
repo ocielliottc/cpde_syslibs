@@ -1,6 +1,7 @@
 #include "as_member_function.h"
 #include "as_parameter.h"
 #include "as_return.h"
+#include "as_xml.h"
 
 std::set<std::string> as_member_function::m_export_filter;
 
@@ -123,6 +124,6 @@ void as_member_function::write_header(std::ostream& hfile)
       size_t ip_ref = return_type.find("@");
       if(ip_ref != std::string::npos)return_type[ip_ref]='*';
 
-      hfile << "  " << return_type << ' ' << m_signature.substr(ipos) << ';' << std::endl << std::endl;
+      hfile << "  " << return_type << ' ' << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
    }
 }

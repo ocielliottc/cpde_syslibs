@@ -2,6 +2,7 @@
 #define AS_XML_H
 
 #include <map>
+#include <set>
 #include <string>
 #include "as_class.h"
 #include <ostream>
@@ -39,6 +40,12 @@ public:
    // write header file to be readable by doxygen
    void write_header(std::ostream& hfile);
 
+   // beautify doxygen header file array syntax to use array<type> syntax instead of type[] syntax
+   static std::string fix_array_types(const std::string& signature);
+
+   // to replace double[] into array<double>, call as_xml::add_array_type("double");
+   static void add_array_type(const std::string& type) { m_array_types.insert(type); }
+
 protected:
 
    // add constructors to the class instance
@@ -54,6 +61,8 @@ protected:
 private:
    std::string                                     m_appnam; // name of application
    std::map<std::string,std::shared_ptr<as_class>> m_types;  // using a map, we get alphabetic sorting
+
+   static std::set<std::string>                    m_array_types;  // for "fix_array_types"
 };
 
 #endif // AS_XML_H

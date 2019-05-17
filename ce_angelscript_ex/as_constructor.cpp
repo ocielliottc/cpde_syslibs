@@ -1,4 +1,5 @@
 #include "as_constructor.h"
+#include "as_xml.h"
 
 as_constructor::as_constructor(const std::string& signature, bool verified,  std::shared_ptr<as_description> descr)
 : as_doc(verified,descr)
@@ -91,5 +92,5 @@ void as_constructor::write_header(std::ostream& hfile)
       }
    }
    size_t ipos = m_signature.find(' ');
-   hfile << "  " << m_signature.substr(ipos) << ';' << std::endl << std::endl;
+   hfile << "  " << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
 }

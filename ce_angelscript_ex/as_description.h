@@ -18,7 +18,7 @@ public:
 
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
-   void write_header(std::ostream& hfile);
+   void write_header(std::ostream& hfile, size_t indent = 3);
 
    size_t size() const { return m_lines.size(); }
    const as_line& line(size_t i) const { return m_lines[i]; }

@@ -67,17 +67,19 @@ void as_description::tokenize(const std::string& input,
    }
 }
 
-void as_description::write_header(std::ostream& hfile)
+void as_description::write_header(std::ostream& hfile, size_t indent)
 {
    if(m_lines.size()>0) {
+      std::string spaces;
+      if(indent>0) spaces.resize(indent,' ');
       // first line has special meaning as "one liner"
-      hfile << "   /// " << m_lines[0].text() << std::endl;
+      hfile << spaces << "/// " << m_lines[0].text() << std::endl;
       if(m_lines.size()>1) {
          size_t last_line = m_lines.size()-1;
          for(size_t i=1; i<m_lines.size(); i++) {
-            if(i==        1) hfile << "   /*! " << m_lines[i].text();
-            else             hfile << "   \\n " << m_lines[i].text();
-            if(i==last_line) hfile << " */";
+            if(i==        1) hfile << spaces << "/*! " << m_lines[i].text();
+            else             hfile << spaces << "\\n " << m_lines[i].text();
+            if(i==last_line) hfile << spaces << "*/";
             hfile << std::endl;
          }
       }

@@ -138,7 +138,7 @@ void as_class::write_header(as_xml* factory, std::ostream& hfile)
    if(m_export_filter.find(m_name) == m_export_filter.end()) {
 
       hfile << std::endl;
-      if(auto descr = description())descr->write_header(hfile);
+      if(auto descr = description())descr->write_header(hfile,0);
       hfile << "class " << m_name;
       if(m_base.length()>0) hfile << " : public " << m_base;
       hfile << " {" << std::endl;
