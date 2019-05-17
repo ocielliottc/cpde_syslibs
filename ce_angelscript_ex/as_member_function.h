@@ -15,6 +15,8 @@ public:
    // unverify this function and all descendants
    void unverify();
 
+   std::string  name() const { return m_name; }
+
    // return raw signature as defined by asIScriptFunction::GetDeclaration
    std::string  signature() const { return m_signature; }
 
@@ -39,6 +41,9 @@ public:
    void write_header(std::ostream& hfile);
 
    static void add_export_filter(const std::string& func_name) { m_export_filter.insert(func_name); }
+   static bool is_filtered(const std::string& func_name) { return (m_export_filter.find(func_name) != m_export_filter.end()); }
+
+   void add_xml_todo(as_xml* factory, size_t level);
 
 private:
    std::string                                m_signature;  // angelscript signature as returned by asIScriptFunction::GetDeclaration

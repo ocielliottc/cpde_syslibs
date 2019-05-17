@@ -374,3 +374,14 @@ void as_xml::write_header(std::ostream& hfile)
       type->write_header(this, hfile);
    }
 }
+
+void as_xml::add_xml_todo(size_t level, const std::string& class_type)
+{
+   bool all_types = (class_type== "*");
+   for(auto& p : m_types) {
+      auto type = p.second;
+      if(all_types || class_type==type->name()) {
+         type->add_xml_todo(this,level);
+      }
+   }
+}

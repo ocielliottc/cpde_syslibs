@@ -25,6 +25,8 @@ public:
 
    std::string doxy_string();
 
+   void add_xml_todo(as_xml* factory, size_t level);
+
 private:
    std::string m_type;    // type name of parameter, e.g. "double"
    std::string m_name;    // parameter name

@@ -172,3 +172,25 @@ bool as_class::function_inherited(as_xml* factory, std::shared_ptr<as_member_fun
    }
    return false;
 }
+
+void as_class::add_xml_todo(as_xml* factory, size_t level)
+{
+   if(level==1) {
+      auto descr = description();
+      if(!descr.get()) {
+         set_description(std::make_shared<as_description>("XML_TODO"));
+      }
+   }
+
+   if(level > 1) {
+      for(auto c: m_constr) (c.second)->add_xml_todo(factory,level);
+      for(auto m: m_mem_funs){
+         auto mfun = m.second;
+         if(!function_inherited(factory,mfun)) {
+            if(!mfun->is_filtered(mfun->name())) {
+               mfun->add_xml_todo(factory,level);
+            }
+         }
+      }
+   }
+}

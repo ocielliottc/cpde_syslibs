@@ -127,3 +127,16 @@ void as_member_function::write_header(std::ostream& hfile)
       hfile << "  " << return_type << ' ' << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
    }
 }
+
+void as_member_function::add_xml_todo(as_xml* factory, size_t level)
+{
+   if(level==2) {
+      auto descr = description();
+      if(!descr.get()) {
+         set_description(std::make_shared<as_description>("XML_TODO"));
+      }
+   }
+   if(level > 2) {
+      for(auto p : m_params) p->add_xml_todo(factory,level);
+   }
+}

@@ -7,6 +7,7 @@
 #include "cf_syslib/xml_node.h"
 #include "as_typeid.h"
 #include "as_description.h"
+class as_xml;
 
 // as_doc is the base class for several types, it manages description data
 class as_doc {
@@ -29,6 +30,13 @@ public:
 
    // export this object to XML DOM tree, under xml_parent
    virtual cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent) = 0;
+
+   // add XML_TODO items for missing descriptions
+   // level 0 : class descriptions
+   // level 1 : constructor/member function descriptions
+   // level 2 : parameter secriptions
+   // if type is specified, this applies to the specified type only
+   virtual void add_xml_todo(as_xml* factory, size_t level) = 0;
 
 private:
    bool                            m_verified;  // true when verified by script engine

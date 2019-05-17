@@ -46,6 +46,14 @@ public:
    // to replace double[] into array<double>, call as_xml::add_array_type("double");
    static void add_array_type(const std::string& type) { m_array_types.insert(type); }
 
+   // add XML_TODO items for missing descriptions
+   // level 1 : class descriptions
+   // level 2 : constructor/member function descriptions
+   // level 3 : parameter secriptions
+   // this applies to the specified type only, or to all types if class_type="*"
+   void add_xml_todo(size_t level, const std::string& class_type);
+
+
 protected:
 
    // add constructors to the class instance

@@ -94,3 +94,17 @@ void as_constructor::write_header(std::ostream& hfile)
    size_t ipos = m_signature.find(' ');
    hfile << "  " << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
 }
+
+
+void as_constructor::add_xml_todo(as_xml* factory, size_t level)
+{
+   if(level==2) {
+      auto descr = description();
+      if(!descr.get()) {
+         set_description(std::make_shared<as_description>("XML_TODO"));
+      }
+   }
+   if(level > 2) {
+      for(auto p : m_params) p->add_xml_todo(factory,level);
+   }
+}

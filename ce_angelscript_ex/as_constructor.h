@@ -35,6 +35,8 @@ public:
 
    void write_header(std::ostream& hfile);
 
+   void add_xml_todo(as_xml* factory, size_t level);
+
 private:
    std::string                                m_signature; // angelscript signature as returned by asIScriptFunction::GetDeclaration
    std::vector<std::shared_ptr<as_parameter>> m_params;

@@ -37,3 +37,14 @@ std::string as_return::doxy_string()
    if(auto descr = description()) txt += ", " + descr->line(0).text();
    return txt;
 }
+
+
+void as_return::add_xml_todo(as_xml* factory, size_t level)
+{
+   if(level==2) {
+      auto descr = description();
+      if(!descr.get()) {
+         set_description(std::make_shared<as_description>("XML_TODO"));
+      }
+   }
+}

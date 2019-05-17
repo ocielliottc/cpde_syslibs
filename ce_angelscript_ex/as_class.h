@@ -47,6 +47,8 @@ public:
 
    static void add_export_filter(const std::string& type_name) { m_export_filter.insert(type_name); }
 
+   void add_xml_todo(as_xml* factory, size_t level);
+
 protected:
    bool has_unique_base_type(const std::string& base_type);
 
