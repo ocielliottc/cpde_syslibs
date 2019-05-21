@@ -58,14 +58,22 @@ public:
    // compute key from signature
    static std::string key(const std::string& signature);
 
+   // add parameter item to function
    void add_parameter(std::shared_ptr<as_parameter> param);
+
+   // add return item to function
    void add_return(std::shared_ptr<as_return> param);
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   // write this to doxygen header file
    void write_header(std::ostream& hfile);
 
+   // add name of function (not signature) to export filter, i.e. it will not be exported to header file
    static void add_export_filter(const std::string& func_name) { m_export_filter.insert(func_name); }
+
+   // check if a given function is mentioned in the finction export filter
    static bool is_filtered(const std::string& func_name) { return (m_export_filter.find(func_name) != m_export_filter.end()); }
 
    void add_xml_todo(as_xml* factory, size_t level);

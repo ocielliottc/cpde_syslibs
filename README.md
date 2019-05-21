@@ -14,3 +14,4 @@ The follwing libraries are included
 | op_lite               |  A portable, lightweight object persistence library for C++ |
 | ce_angelscript        |  CPDE adaption of https://www.angelcode.com/angelscript/ |
 | ce_angelscript_ex     |  CPDE extension library to  Angelscript |
+| cf_syslib             |  CPDE System library with commonly used classes/functions |

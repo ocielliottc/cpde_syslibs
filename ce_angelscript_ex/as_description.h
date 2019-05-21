@@ -39,15 +39,22 @@ public:
    as_description(const as_line& line);
    virtual ~as_description();
 
+   // add line to description
    void add_line(const as_line& line);
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   // write this to doxygen header file
    void write_header(std::ostream& hfile, size_t indent = 3);
 
+   // return number of lines
    size_t size() const { return m_lines.size(); }
+
+   // return line at index i
    const as_line& line(size_t i) const { return m_lines[i]; }
 
+   // tokenize the input string
    static void tokenize(const std::string& input,
                         const std::string& delimiters,
                         std::vector<std::string>& tokens);

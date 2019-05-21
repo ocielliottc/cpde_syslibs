@@ -49,7 +49,6 @@ public:
    // fill data from script engine
    void from_script_engine(asIScriptEngine* engine);
 
-
    // look up a class by type name (may return null)
    std::shared_ptr<as_class> lookup_class(const std::string& type_name, bool verified);
 

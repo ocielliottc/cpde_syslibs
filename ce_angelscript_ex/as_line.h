@@ -35,6 +35,7 @@ public:
    as_line(const std::string& text);
    virtual ~as_line();
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
    const std::string& text() const { return m_text; }

@@ -56,10 +56,13 @@ public:
    // add constructor parameter
    void add_parameter(std::shared_ptr<as_parameter> param);
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   // write this to doxygen header file
    void write_header(std::ostream& hfile);
 
+   // add XML_TODO description items where descriptions are missing, according to level (see as_xml)
    void add_xml_todo(as_xml* factory, size_t level);
 
 private:

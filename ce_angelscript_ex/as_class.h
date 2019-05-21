@@ -35,6 +35,7 @@ class as_xml;
 
 // as_class represents a complete scripting class
 class as_class : public as_doc {
+   friend class as_xml;
 public:
    as_class(cf_syslib::xml_node& node);
    as_class(const std::string& name, bool verified, std::shared_ptr<as_description> descr);
@@ -52,30 +53,37 @@ public:
    // set name of base class
    void set_base(const std::string& base) { m_base = base; }
 
+   // return name of class
    std::string name() const { return m_name; }
+
+   // return name of base class, or empty if none
    std::string base() const { return m_base; }
 
+   // add constructor to the class
    void add_constructor(std::shared_ptr<as_constructor> constr);
+
+   // add member function to the class
    void add_member_function(std::shared_ptr<as_member_function> mfun);
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
-
-   const std::map<std::string,std::shared_ptr<as_constructor>>&  constr() const { return m_constr; }
-
-   void add_base_candidate(std::string base_type);
-   bool resolve_base_type(as_xml* factory);
 
    // return true if the function signature was inherited
    bool function_inherited(as_xml* factory, std::shared_ptr<as_member_function> mfun);
 
+   // write this to doxygen header file
    void write_header(as_xml* factory, std::ostream& hfile);
 
+   // add a class name to the export filter, i.e. it will not be exported to header file
    static void add_export_filter(const std::string& type_name) { m_export_filter.insert(type_name); }
 
+   // add XML_TODO description items where descriptions are missing, according to level (see as_xml)
    void add_xml_todo(as_xml* factory, size_t level);
 
 protected:
    bool has_unique_base_type(const std::string& base_type);
+   void add_base_candidate(std::string base_type);
+   bool resolve_base_type(as_xml* factory);
 
 private:
    std::string m_name;  // name of class

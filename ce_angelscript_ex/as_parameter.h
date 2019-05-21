@@ -38,18 +38,26 @@ public:
    // unverify this parameter and all descendants
    void unverify();
 
-   void set_name(const std::string& name) { m_name = name; }
+   // set parameter type
    void set_type(const std::string& type) { m_type = type; }
+
+   // set parameter name
+   void set_name(const std::string& name) { m_name = name; }
+
+   // set default value
    void set_defval(const std::string& defval) { m_defval = defval; }
 
    std::string type() const { return m_type; }
    std::string name() const { return m_name; }
    std::string defval() const { return m_defval; }
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
+   // return doxygen \param string for this parameter
    std::string doxy_string();
 
+   // write this to doxygen header file
    void add_xml_todo(as_xml* factory, size_t level);
 
 private:

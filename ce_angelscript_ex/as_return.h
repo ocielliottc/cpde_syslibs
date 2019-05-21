@@ -35,15 +35,19 @@ public:
    as_return(const std::string& type,  bool verified, std::shared_ptr<as_description> descr = 0);
    virtual ~as_return();
 
+   // set return type
    void set_type(const std::string& type) { m_type = type; }
    std::string type() const { return m_type; }
 
+   // export this to XML as child under xml_parent
    cf_syslib::xml_node to_xml(cf_syslib::xml_node& xml_parent);
 
    void unverify();
 
+   // return doxygen \return string for this parameter
    std::string doxy_string();
 
+   // add XML_TODO description items where descriptions are missing, according to level (see as_xml)
    void add_xml_todo(as_xml* factory, size_t level);
 
 private:
