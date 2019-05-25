@@ -72,7 +72,7 @@ std::string as_parameter::doxy_string()
 
 void as_parameter::add_xml_todo(as_xml* factory, size_t level)
 {
-   if(level==2) {
+   if(level==3) {
       auto descr = description();
       if(!descr.get()) {
          set_description(std::make_shared<as_description>("XML_TODO"));
