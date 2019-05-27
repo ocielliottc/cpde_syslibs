@@ -24,7 +24,7 @@
 // EndLicense:
 
 #include "as_vector.h"
-#include "ce_angelscript_ex/as_factory.h"
+#include "as_factory.h"
 
 CScriptArray* CreateScriptArrayEmpty(const std::string& type, size_t len)
 {

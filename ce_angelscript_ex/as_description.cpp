@@ -24,7 +24,7 @@
 // EndLicense:
 
 #include "as_description.h"
-#include "ce_angelscript_ex/as_typeid.h"
+#include "as_typeid.h"
 #include "as_doc.h"
 #include <ostream>
 
