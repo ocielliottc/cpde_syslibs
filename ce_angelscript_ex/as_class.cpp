@@ -160,29 +160,31 @@ bool as_class::resolve_base_type(as_xml* factory)
 
 void as_class::write_header(as_xml* factory, std::ostream& hfile)
 {
-   if(m_export_filter.find(m_name) == m_export_filter.end()) {
+   if(is_verified()) {
+      if(m_export_filter.find(m_name) == m_export_filter.end()) {
 
-      hfile << std::endl;
-      if(auto descr = description())descr->write_header(hfile,0);
-      hfile << "class " << m_name;
-      if(m_base.length()>0) hfile << " : public " << m_base;
-      hfile << " {" << std::endl;
-      hfile << "public:" << std::endl;
-      for(auto& p : m_constr) {
-         auto& constr = p.second;
-         constr->write_header(hfile);
-      }
-      for(auto& p : m_mem_funs) {
-         auto& mfun = p.second;
-
-         // check if this function was inherited.
-         // only export functions that were not inherited
-         if(!function_inherited(factory,mfun)) {
-            mfun->write_header(hfile);
+         hfile << std::endl;
+         if(auto descr = description())descr->write_header(hfile,0);
+         hfile << "class " << m_name;
+         if(m_base.length()>0) hfile << " : public " << m_base;
+         hfile << " {" << std::endl;
+         hfile << "public:" << std::endl;
+         for(auto& p : m_constr) {
+            auto& constr = p.second;
+            constr->write_header(hfile);
          }
-      }
+         for(auto& p : m_mem_funs) {
+            auto& mfun = p.second;
 
-      hfile << "};" << std::endl;
+            // check if this function was inherited.
+            // only export functions that were not inherited
+            if(!function_inherited(factory,mfun)) {
+               mfun->write_header(hfile);
+            }
+         }
+
+         hfile << "};" << std::endl;
+      }
    }
 }
 

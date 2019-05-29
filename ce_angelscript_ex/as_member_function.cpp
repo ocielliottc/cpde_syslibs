@@ -115,41 +115,44 @@ void as_member_function::unverify()
 
 void as_member_function::write_header(std::ostream& hfile)
 {
-   if(m_export_filter.find(m_name) == m_export_filter.end()) {
+   if(is_verified()) {
 
-      if(auto descr = description())  descr->write_header(hfile);
+      if(m_export_filter.find(m_name) == m_export_filter.end()) {
 
-      std::vector<std::string> lines;
-      for(auto& par : m_params) {
-         lines.push_back(par->doxy_string());
-      }
-      std::string ret = m_return->doxy_string();
-      if(ret.length()>0)lines.push_back(ret);
+         if(auto descr = description())  descr->write_header(hfile);
 
-      if(lines.size() > 0) {
-         size_t last_line = lines.size()-1;
-         for(size_t i=0; i<lines.size(); i++) {
-            if(i==        0) hfile << "   /*! " << lines[i];
-            else             hfile << "   \\n " << lines[i];
-            if(i==last_line) hfile << " */";
-            hfile << std::endl;
+         std::vector<std::string> lines;
+         for(auto& par : m_params) {
+            lines.push_back(par->doxy_string());
          }
+         std::string ret = m_return->doxy_string();
+         if(ret.length()>0)lines.push_back(ret);
+
+         if(lines.size() > 0) {
+            size_t last_line = lines.size()-1;
+            for(size_t i=0; i<lines.size(); i++) {
+               if(i==        0) hfile << "   /*! " << lines[i];
+               else             hfile << "   \\n " << lines[i];
+               if(i==last_line) hfile << " */";
+               hfile << std::endl;
+            }
+         }
+
+         // doxygen is not able to correctly handle angelscript handles on return values,
+         // so instead we fake it by writing it as a C++ pointer
+         // and later do a global replace from * to @ in the generated HTML files.
+         // Linux:
+         //    rpl  " *&#160;" "@&#160;" *.html
+         //
+         // more or less: replace " * " with "@ "
+         //
+         size_t ipos = m_signature.find(' ');
+         std::string return_type = m_signature.substr(0,ipos);
+         size_t ip_ref = return_type.find("@");
+         if(ip_ref != std::string::npos)return_type[ip_ref]='*';
+
+         hfile << "  " << return_type << ' ' << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
       }
-
-      // doxygen is not able to handle angelscript handles on return values,
-      // so instead we fake it by writing it as a C++ pointer
-      // and later do a global replace from * to @ in the henerated HTML files.
-      // Linux:
-      //    rpl  " *&#160;" "@&#160;" *.html
-      //
-      // more or less: replace " * " with "@ "
-      //
-      size_t ipos = m_signature.find(' ');
-      std::string return_type = m_signature.substr(0,ipos);
-      size_t ip_ref = return_type.find("@");
-      if(ip_ref != std::string::npos)return_type[ip_ref]='*';
-
-      hfile << "  " << return_type << ' ' << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
    }
 }
 

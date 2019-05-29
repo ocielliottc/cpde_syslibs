@@ -100,24 +100,27 @@ void as_constructor::unverify()
 
 void as_constructor::write_header(std::ostream& hfile)
 {
-   if(auto descr = description())  descr->write_header(hfile);
+   if(is_verified()) {
 
-   std::vector<std::string> lines;
-   for(auto& par : m_params) {
-      lines.push_back(par->doxy_string());
-   }
+      if(auto descr = description())  descr->write_header(hfile);
 
-   if(lines.size() > 0) {
-      size_t last_line = lines.size()-1;
-      for(size_t i=0; i<lines.size(); i++) {
-         if(i==        0) hfile << "   /*! " << lines[i];
-         else             hfile << "   \\n " << lines[i];
-         if(i==last_line) hfile << " */";
-         hfile << std::endl;
+      std::vector<std::string> lines;
+      for(auto& par : m_params) {
+         lines.push_back(par->doxy_string());
       }
+
+      if(lines.size() > 0) {
+         size_t last_line = lines.size()-1;
+         for(size_t i=0; i<lines.size(); i++) {
+            if(i==        0) hfile << "   /*! " << lines[i];
+            else             hfile << "   \\n " << lines[i];
+            if(i==last_line) hfile << " */";
+            hfile << std::endl;
+         }
+      }
+      size_t ipos = m_signature.find(' ');
+      hfile << "  " << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
    }
-   size_t ipos = m_signature.find(' ');
-   hfile << "  " << as_xml::fix_array_types(m_signature.substr(ipos)) << ';' << std::endl << std::endl;
 }
 
 

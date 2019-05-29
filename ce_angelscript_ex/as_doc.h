@@ -47,6 +47,9 @@ public:
    // provide read & write access to description
    std::shared_ptr<as_description> description() { return m_descr; }
 
+   // check verification flag
+   bool is_verified() const { return m_verified; }
+
    // set verification flag
    void set_verified(bool verified = true) { m_verified = verified; }
 
