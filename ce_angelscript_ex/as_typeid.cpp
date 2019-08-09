@@ -49,6 +49,8 @@ std::string as_class_name(const std::type_info& type)
    int s=0;
    char* p = abi::__cxa_demangle(name.c_str(),0,&len,&s);
    name = p;
+   // _cxa_demangle documentation says user is responsible for deallocating the memory
+   std::free(p);
 #endif
    return name;
 }

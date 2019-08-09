@@ -20,6 +20,8 @@ std::string op_class_name(const std::string& typeid_name)
    int s=0;
    char* p = abi::__cxa_demangle(typeid_name.c_str(),0,&len,&s);
    name = p;
+   // _cxa_demangle documentation says user is responsible for deallocating the memory
+   std::free(p);
 #endif
    return name;
 }
