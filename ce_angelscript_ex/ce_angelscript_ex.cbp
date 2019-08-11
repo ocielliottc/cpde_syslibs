@@ -5,7 +5,7 @@
 		<Option title="ce_angelscript_ex" />
 		<Option pch_mode="2" />
 		<Option compiler="msvc" />
-		<Option virtualFolders="iostream/;as_xml/" />
+		<Option virtualFolders="iostream/;as_xml/;as_streams/" />
 		<Build>
 			<Target title="MSVC_Debug">
 				<Option output=".cmp/msvc/ce_angelscript_exd" prefix_auto="1" extension_auto="1" />
@@ -173,6 +173,12 @@
 		</Unit>
 		<Unit filename="as_member_function.h">
 			<Option virtualFolder="as_xml/" />
+		</Unit>
+		<Unit filename="as_ostream.cpp">
+			<Option virtualFolder="as_streams/" />
+		</Unit>
+		<Unit filename="as_ostream.h">
+			<Option virtualFolder="as_streams/" />
 		</Unit>
 		<Unit filename="as_parameter.cpp">
 			<Option virtualFolder="as_xml/" />
