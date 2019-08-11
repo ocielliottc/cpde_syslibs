@@ -36,6 +36,7 @@
 #include "ASIStream.h"
 #include "ASStreams.h"
 #include "as_assert.h"
+#include "as_ostream.h"
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
@@ -214,9 +215,13 @@ as_factory::as_factory()
    RegisterScriptMath(m_engine);
  // Temporarily removed, crashes  RegisterScriptMathComplex(m_engine);
 
+
+/*
    RegisterStreams(m_engine);
    RegisterIStream(m_engine);
    RegisterOStream(m_engine);
+*/
+   as_ostream::InstallType(m_engine);
 
    // register aatc container classes
 //   aatc::RegisterAllContainers(m_engine);  // for the complete set
