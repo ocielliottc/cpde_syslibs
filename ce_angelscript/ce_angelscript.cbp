@@ -230,6 +230,7 @@
 			<Option target="MSVC_Release" />
 		</Unit>
 		<Unit filename="angelscript_2.33.0/sdk/angelscript/source/as_callfunc_x64_msvc_asm.asm">
+			<Option compiler="msvc" use="1" buildCommand="$(#MSVC_TOOLCHAIN.ASM)  /c /nologo /W3 /Zi  /Fo$object $file" />
 			<Option target="MSVC_Debug" />
 			<Option target="MSVC_Release" />
 		</Unit>
