@@ -184,6 +184,9 @@ as_factory::as_factory()
 , m_line_number(0)
 , m_col_number(0)
 {
+   if(m_singleton) throw std::logic_error("as_factory singleton already created");
+   m_singleton = this;
+
    // Create the script engine
    m_engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
 
@@ -215,12 +218,7 @@ as_factory::as_factory()
    RegisterScriptMath(m_engine);
  // Temporarily removed, crashes  RegisterScriptMathComplex(m_engine);
 
-
-/*
-   RegisterStreams(m_engine);
-   RegisterIStream(m_engine);
-   RegisterOStream(m_engine);
-*/
+   // register as_ostream providing the cout object
    as_ostream::InstallType(m_engine);
 
    // register aatc container classes
