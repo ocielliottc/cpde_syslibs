@@ -32,13 +32,13 @@ protected:
    {
       int r = 0;
       r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(string& out v)",asMETHOD(as_istream,in_string), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(bool& out v)",asMETHOD(as_istream,in_string), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(int& out v)",asMETHOD(as_istream,in_int), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(uint& out v)",asMETHOD(as_istream,in_uint), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(int64& out v)",asMETHOD(as_istream,in_int64), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(uint64& out v)",asMETHOD(as_istream,in_uint64), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(float& out v)",asMETHOD(as_istream,in_float), asCALL_THISCALL); as_assert( r >= 0 );
-      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShl(double& out v)",asMETHOD(as_istream,in_double), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(bool& out v)",asMETHOD(as_istream,in_string), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(int& out v)",asMETHOD(as_istream,in_int), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(uint& out v)",asMETHOD(as_istream,in_uint), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(int64& out v)",asMETHOD(as_istream,in_int64), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(uint64& out v)",asMETHOD(as_istream,in_uint64), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(float& out v)",asMETHOD(as_istream,in_float), asCALL_THISCALL); as_assert( r >= 0 );
+      r = engine->RegisterObjectMethod(type_name.c_str(),"as_istream& opShr(double& out v)",asMETHOD(as_istream,in_double), asCALL_THISCALL); as_assert( r >= 0 );
 
    }
 
