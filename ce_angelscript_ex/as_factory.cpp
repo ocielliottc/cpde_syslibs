@@ -32,11 +32,12 @@
 #include "ce_angelscript/add_on/scriptmath/scriptmath.h"
 #include "ce_angelscript/add_on/scriptmath/scriptmathcomplex.h"
 #include "ce_angelscript/add_on/aatc/aatc.hpp"
-#include "ASOStream.h"
-#include "ASIStream.h"
-#include "ASStreams.h"
+//#include "ASOStream.h"
+//#include "ASIStream.h"
+//#include "ASStreams.h"
 #include "as_assert.h"
 #include "as_ostream.h"
+#include "as_istream.h"
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
@@ -218,8 +219,9 @@ as_factory::as_factory()
    RegisterScriptMath(m_engine);
  // Temporarily removed, crashes  RegisterScriptMathComplex(m_engine);
 
-   // register as_ostream providing the cout object
+   // register as_ostream/as_istream providing the cout/cin stream objects
    as_ostream::InstallType(m_engine);
+   as_istream::InstallType(m_engine);
 
    // register aatc container classes
 //   aatc::RegisterAllContainers(m_engine);  // for the complete set

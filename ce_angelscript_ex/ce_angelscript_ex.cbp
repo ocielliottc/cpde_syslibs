@@ -162,6 +162,12 @@
 		<Unit filename="as_include_callback.h" />
 		<Unit filename="as_initializer_vector.cpp" />
 		<Unit filename="as_initializer_vector.h" />
+		<Unit filename="as_istream.cpp">
+			<Option virtualFolder="as_streams/" />
+		</Unit>
+		<Unit filename="as_istream.h">
+			<Option virtualFolder="as_streams/" />
+		</Unit>
 		<Unit filename="as_line.cpp">
 			<Option virtualFolder="as_xml/" />
 		</Unit>

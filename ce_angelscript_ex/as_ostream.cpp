@@ -40,8 +40,10 @@ void as_ostream::Release()
    // Decrease ref count
    if(m_refcount > 0) {
       if(--m_refcount==0) {
-       // we never delete this global singleton object
-       //  delete this;
+         // we never delete this global singleton object
+         if(this != &as_ostream_cout) {
+            delete this;
+         }
          return;
       }
    }
