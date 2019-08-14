@@ -244,6 +244,11 @@ as_factory::as_factory()
    m_engine->RegisterGlobalFunction("string GetInputFullPath()",      asFUNCTION(GetInputFullPath), asCALL_CDECL); assert( r >= 0 );
    m_engine->RegisterGlobalFunction("string GetInputFullPathNoExt()", asFUNCTION(GetInputFullPathNoExt), asCALL_CDECL); assert( r >= 0 );
    m_engine->RegisterGlobalFunction("string GetOutputFullPath(const string &in ext)", asFUNCTION(GetOutputFullPath), asCALL_CDECL); assert( r >= 0 );
+
+
+   // enable throw and getExceptionInfo
+   RegisterExceptionRoutines(m_engine);
+
 }
 
 void as_factory::SetLibraryIncludePath(const string& path)
