@@ -57,8 +57,11 @@ public:
    /// construct from pointer only (points to persistent object)
    op_ptr(T* ptr) : op_value<string>(""),m_object(ptr) { assign_ptxt(m_object->op_type(), m_object->pid().id()); }
 
-   /// construct from raw rowid and given type
+   /// construct from raw rowid and template type
    op_ptr(IDint64 id) : op_value<string>(""),m_object(0) { assign_ptxt(op_class_name(typeid(T).name()), id); m_object = get(); }
+
+   /// construct from explicit type string and raw rowid
+   op_ptr(const string& type, IDint64 id) : op_value<string>(""),m_object(0) { assign_ptxt(type, id); m_object = get(); }
 
    /// construct from persistent object identifier
    op_ptr(const op_pid& pid ) : op_value<string>(""),m_object(0) { assign_ptxt(pid.table()->name(), pid.id());  m_object = get(); }
