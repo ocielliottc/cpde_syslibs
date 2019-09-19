@@ -58,11 +58,11 @@ public:
    /// construct from pointer only (points to persistent object)
    op_ptr(T* ptr) : op_value<string>(""),m_object(ptr) { assign_ptxt(m_object->op_type(), m_object->pid().id()); }
 
-   /// construct from raw rowid and template type, currently selected database
-   op_ptr(IDint64 id) : op_value<string>(""),m_object(0) { assign_ptxt(op_class_name(typeid(T).name()), id); m_object = get(); }
+   /// construct from raw rowid and template type, specified or currently selected database
+   op_ptr(IDint64 id, op_database* db = 0) : op_value<string>(""),m_object(0) { assign_ptxt(op_class_name(typeid(T).name()), id); m_object = get(db); }
 
-   /// construct from explicit type string and raw rowid, currently selected database
-   op_ptr(const string& type, IDint64 id) : op_value<string>(""),m_object(0) { assign_ptxt(type, id); m_object = get(); }
+   /// construct from explicit type string and raw rowid, specified or currently selected database
+   op_ptr(const string& type, IDint64 id, op_database* db = 0) : op_value<string>(""),m_object(0) { assign_ptxt(type, id); m_object = get(db); }
 
    /// construct from persistent object identifier, object's associated database
    op_ptr(const op_pid& pid ) : op_value<string>(""),m_object(0) { assign_ptxt(pid.table()->name(), pid.id());  m_object = get(pid.table()->db()); }
