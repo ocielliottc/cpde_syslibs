@@ -128,6 +128,10 @@
 		<Unit filename="ASStreams.h">
 			<Option virtualFolder="iostream/" />
 		</Unit>
+		<Unit filename="as_args.cpp" />
+		<Unit filename="as_args.h" />
+		<Unit filename="as_args_impl.cpp" />
+		<Unit filename="as_args_impl.h" />
 		<Unit filename="as_assert.cpp" />
 		<Unit filename="as_assert.h" />
 		<Unit filename="as_class.cpp">
@@ -212,9 +216,6 @@
 		</Unit>
 		<Unit filename="ce_angelscript_ex_config.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
