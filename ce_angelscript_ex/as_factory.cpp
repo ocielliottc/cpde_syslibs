@@ -38,6 +38,7 @@
 #include "as_assert.h"
 #include "as_ostream.h"
 #include "as_istream.h"
+#include "as_args.h"
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
@@ -179,11 +180,16 @@ string as_factory::GetOutSubDir()
    return singleton()->m_outsubdir;
 }
 
+as_args* as_factory::GetArgs()
+{
+   return new as_args(singleton()->m_args);
+}
 
 as_factory::as_factory()
 : m_echo_ref(false)
 , m_line_number(0)
 , m_col_number(0)
+, m_args(std::make_shared<as_args_impl>())
 {
    if(m_singleton) throw std::logic_error("as_factory singleton already created");
    m_singleton = this;
@@ -246,9 +252,17 @@ as_factory::as_factory()
    m_engine->RegisterGlobalFunction("string GetOutputFullPath(const string &in ext)", asFUNCTION(GetOutputFullPath), asCALL_CDECL); assert( r >= 0 );
 
 
+
    // enable throw and getExceptionInfo
    RegisterExceptionRoutines(m_engine);
 
+}
+
+void as_factory::RegisterGlobalGetArgs()
+{
+   // input arguments to script
+   as_args::InstallType(m_engine);
+   int r = m_engine->RegisterGlobalFunction("as_args@ GetArgs()", asFUNCTION(GetArgs), asCALL_CDECL); assert( r >= 0 );
 }
 
 void as_factory::SetLibraryIncludePath(const string& path)
