@@ -8,7 +8,7 @@ using namespace std;
 cf_serial_simple::cf_serial_simple(const std::string& port, size_t baud_rate)
 {
    m_sp = std::make_shared<boost_serial_port>(m_ios,port);
-   m_sp->set_option(boost_serial_port::baud_rate(unsigned int(baud_rate)));
+   m_sp->set_option(boost_serial_port::baud_rate((unsigned int)baud_rate));
 }
 
 cf_serial_simple::~cf_serial_simple()

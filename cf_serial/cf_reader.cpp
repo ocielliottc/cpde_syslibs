@@ -20,9 +20,9 @@ cf_reader::~cf_reader()
    m_ios.reset();
 }
 
-bool cf_reader::read_string(std::string& text, size_t max_len)
+bool cf_reader::read_buffer(size_t max_len)
 {
-   m_bytes_transferred = 0;
+      m_bytes_transferred = 0;
 
    // prepare the receive buffer
    m_buffer.clear();
@@ -41,11 +41,38 @@ bool cf_reader::read_string(std::string& text, size_t max_len)
 
    // resize receive buffer and convert reply to string
    m_buffer.resize(m_bytes_transferred);
-   text = std::string(m_buffer.begin(), m_buffer.end());
 
-   return (text.length()>0);
+   return (m_buffer.size()>0);
 }
 
+bool cf_reader::read_string(std::string& text, size_t max_len)
+{
+   bool retval = read_buffer(max_len);
+   text = std::string(m_buffer.begin(), m_buffer.end());
+   return retval;
+}
+
+bool cf_reader::read(int& value)
+{
+   if(read_buffer(sizeof(value))) {
+
+      // check this: is the byte order correct?
+      memcpy(&value,&m_buffer[0],sizeof(value));
+      return true;
+   }
+   return false;
+}
+
+bool cf_reader::read(float& value)
+{
+   if(read_buffer(sizeof(value))) {
+
+      // check this: is the byte order correct?
+      memcpy(&value,&m_buffer[0],sizeof(value));
+      return true;
+   }
+   return false;
+}
 
 // Called when an async read completes or has been cancelled
 void cf_reader::read_complete(const boost::system::error_code& error, size_t bytes_transferred)

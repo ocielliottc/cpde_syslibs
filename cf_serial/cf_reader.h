@@ -16,7 +16,15 @@ public:
    // read a string of max length
    bool read_string(std::string& text, size_t max_len=1024);
 
+   // read integer (untested)
+   bool read(int& value);
+
+   // read float (untested)
+   bool read(float& value);
+
 protected:
+   // read from port into buffer
+   bool read_buffer(size_t max_len);
 
    // Called when an async read completes or has been cancelled
    void read_complete(const boost::system::error_code& error, size_t bytes_transferred);
