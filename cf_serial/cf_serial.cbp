@@ -15,16 +15,16 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="/MDd" />
-					<Add option="/GF" />
 					<Add option="/Od" />
 					<Add option="/W3" />
+					<Add option="/GF" />
 					<Add option="/RTCsu" />
 					<Add option="/EHsc" />
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.debug) --iso --cxxflags`" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
-					<Add option="/D_WIN32_WINNT=0x0501" />
+					<Add option="/D_WIN32_WINNT=0x0601" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -40,15 +40,15 @@
 				<Option createDefFile="1" />
 				<Compiler>
 					<Add option="/MD" />
-					<Add option="/GF" />
 					<Add option="/Ox" />
 					<Add option="/W3" />
+					<Add option="/GF" />
 					<Add option="/EHsc" />
 					<Add option="`$(CPDE_USR)\bin\wx-config.exe --prefix=$(#wx) --wxcfg=$(#wx.release) --iso --cxxflags`" />
 					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
-					<Add option="/D_WIN32_WINNT=0x0501" />
+					<Add option="/D_WIN32_WINNT=0x0601" />
 					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>

@@ -24,10 +24,11 @@ public:
    // write string to serial port
    void write_string(const std::string& text);
 
-protected:
-
    // read string from serial port
    std::string read_some();
+
+
+protected:
 
 private:
    boost_io_service                   m_ios;   // io service mus exist during communication

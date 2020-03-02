@@ -10,7 +10,7 @@ public:
 
 	// Constructs a blocking reader, pass in an open serial_port and
 	// a timeout in milliseconds.
-   cf_blocking_reader(boost::asio::serial_port& port, size_t timeout);
+   cf_blocking_reader(boost::asio::io_service& ios, boost::asio::serial_port& port, size_t timeout);
    virtual ~cf_blocking_reader();
 
 	// Reads a character or times out
@@ -26,11 +26,13 @@ protected:
    void time_out(const boost::system::error_code& error);
 
 private:
+   boost::asio::io_service&    m_ios;
 	boost::asio::serial_port&   m_port;
 	size_t                      m_timeout;
 	char                        m_c;
 	boost::asio::deadline_timer m_timer;
-	bool                        m_read_error;
+
+	size_t                      m_bytes_transferred;
 };
 
 #endif // CF_BLOCKING_READER_H

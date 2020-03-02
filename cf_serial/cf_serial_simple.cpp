@@ -1,5 +1,7 @@
 #include "cf_serial_simple.h"
 #include "cf_blocking_reader.h"
+#include <iostream>
+using namespace std;
 
 // code example
 // https://stackoverflow.com/questions/23519309/serial-port-communication-c-linux
@@ -18,21 +20,16 @@ cf_serial_simple::~cf_serial_simple()
 bool cf_serial_simple::read_string(std::string& text, size_t timeout_ms, const char& term)
 {
    std::string retval;
-   cf_blocking_reader reader(*m_sp,timeout_ms);
+   cf_blocking_reader reader(m_ios,*m_sp,timeout_ms);
 
    // read until terminating character found, or timeout
    char c='\0';
    while(reader.read_char(c)) {
-      if(c == term) {
-         text = retval;
-         return true;
-      }
       retval += c;
    }
 
-   // timeout occurred
    text = retval;
-   return false;
+   return true;
 }
 
 void cf_serial_simple::write_string(const std::string& text)
