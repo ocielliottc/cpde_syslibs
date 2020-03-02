@@ -1,10 +1,9 @@
 #include "cf_serial_simple.h"
-#include "cf_blocking_reader.h"
+#include "cf_reader.h"
 #include <iostream>
 using namespace std;
 
-// code example
-// https://stackoverflow.com/questions/23519309/serial-port-communication-c-linux
+
 
 cf_serial_simple::cf_serial_simple(const std::string& port, size_t baud_rate)
 {
@@ -17,20 +16,6 @@ cf_serial_simple::~cf_serial_simple()
    m_sp->close();
 }
 
-bool cf_serial_simple::read_string(std::string& text, size_t timeout_ms, const char& term)
-{
-   std::string retval;
-   cf_blocking_reader reader(m_ios,*m_sp,timeout_ms);
-
-   // read until terminating character found, or timeout
-   char c='\0';
-   while(reader.read_char(c)) {
-      retval += c;
-   }
-
-   text = retval;
-   return true;
-}
 
 void cf_serial_simple::write_string(const std::string& text)
 {
@@ -39,6 +24,9 @@ void cf_serial_simple::write_string(const std::string& text)
 
 std::string cf_serial_simple::read_some()
 {
+  // code example
+  // https://stackoverflow.com/questions/23519309/serial-port-communication-c-linux
+
    std::string retval;
 
    const size_t bufsiz=1024;
@@ -51,4 +39,11 @@ std::string cf_serial_simple::read_some()
    return retval;
 }
 
+
+bool cf_serial_simple::read(std::string& text, size_t timeout_ms)
+{
+   // read with timeout
+   cf_reader reader(m_ios,*m_sp,timeout_ms);
+   return reader.read_string(text);
+}
 

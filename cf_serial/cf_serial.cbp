@@ -25,6 +25,7 @@
 					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
 					<Add option="/D_CRT_SECURE_DEPRECATE" />
 					<Add option="/D_WIN32_WINNT=0x0601" />
+					<Add directory="./" />
 				</Compiler>
 				<ExtraCommands>
 					<Add after="$(CPDE_USR)/bin/cpde_usr -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
@@ -107,6 +108,8 @@
 		</Compiler>
 		<Unit filename="cf_blocking_reader.cpp" />
 		<Unit filename="cf_blocking_reader.h" />
+		<Unit filename="cf_reader.cpp" />
+		<Unit filename="cf_reader.h" />
 		<Unit filename="cf_serial_config.h" />
 		<Unit filename="cf_serial_simple.cpp" />
 		<Unit filename="cf_serial_simple.h" />
