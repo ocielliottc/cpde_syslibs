@@ -106,8 +106,6 @@
 			<Add directory="$(CPDE_USR)/include" />
 			<Add directory="$(#boost.include)" />
 		</Compiler>
-		<Unit filename="cf_blocking_reader.cpp" />
-		<Unit filename="cf_blocking_reader.h" />
 		<Unit filename="cf_reader.cpp" />
 		<Unit filename="cf_reader.h" />
 		<Unit filename="cf_serial_config.h" />
