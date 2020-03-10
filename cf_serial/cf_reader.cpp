@@ -12,7 +12,9 @@ cf_reader::cf_reader(boost::asio::io_service& ios, boost::asio::serial_port& por
 , m_port(port)
 , m_timeout_ms(timeout_ms)
 , m_timer(m_ios)
-{}
+{
+   m_ios.reset();
+}
 
 cf_reader::~cf_reader()
 {
