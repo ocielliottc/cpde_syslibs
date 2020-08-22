@@ -22,12 +22,14 @@ public:
    int    get_int(const string& arg) const;
    size_t get_uint(const string& arg) const;
    double get_double(const string& arg) const;
+   double get_unsigned_double(const string& arg) const;
    string get_string(const string& arg) const;
 
    // these return the default value if argument not found
    int    get_int(const string& arg, int def) const;
    size_t get_uint(const string& arg, size_t def) const;
    double get_double(const string& arg, double def) const;
+   double get_unsigned_double(const string& arg, double def) const;
    string get_string(const string& arg, string def) const;
 
 private:

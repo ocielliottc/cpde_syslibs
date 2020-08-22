@@ -25,9 +25,11 @@ bool   as_args::has_argument(const string& arg) const { return m_impl->has_argum
 int    as_args::get_int(const string& arg) const      { return m_impl->get_int(arg); }
 size_t as_args::get_uint(const string& arg) const     { return m_impl->get_uint(arg); }
 double as_args::get_double(const string& arg) const   { return m_impl->get_double(arg); }
+double as_args::get_unsigned_double(const string& arg) const   { return m_impl->get_unsigned_double(arg); }
 string as_args::get_string(const string& arg) const   { return m_impl->get_string(arg); }
 
 int    as_args::get_int_def(const string& arg, int def) const       { return m_impl->get_int(arg,def); }
 size_t as_args::get_uint_def(const string& arg, size_t def) const   { return m_impl->get_uint(arg,def); }
 double as_args::get_double_def(const string& arg, double def) const { return m_impl->get_double(arg,def); }
+double as_args::get_unsigned_double_def(const string& arg, double def) const { return m_impl->get_unsigned_double(arg,def); }
 string as_args::get_string_def(const string& arg, string def) const { return m_impl->get_string(arg,def); }

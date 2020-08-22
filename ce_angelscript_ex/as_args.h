@@ -17,12 +17,14 @@ public:
    int    get_int(const string& arg) const;
    size_t get_uint(const string& arg) const;
    double get_double(const string& arg) const;
+   double get_unsigned_double(const string& arg) const;
    string get_string(const string& arg) const;
 
    // these return the default value if argument not found
    int    get_int_def(const string& arg, int def) const;
    size_t get_uint_def(const string& arg, size_t def) const;
    double get_double_def(const string& arg, double def) const;
+   double get_unsigned_double_def(const string& arg, double def) const;
    string get_string_def(const string& arg, string def) const;
 
    // InstallType registers this class in the scripting engine
@@ -52,11 +54,13 @@ protected:
       r = DeclareMethod(engine,type_name,"int get_int(string arg) const",       asMETHOD(as_args,get_int));      as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"uint get_uint(string arg) const",     asMETHOD(as_args,get_uint));     as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"double get_double(string arg) const", asMETHOD(as_args,get_double));   as_assert( r >= 0 );
+      r = DeclareMethod(engine,type_name,"double get_unsigned_double(string arg) const", asMETHOD(as_args,get_unsigned_double));   as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"string get_string(string arg) const", asMETHOD(as_args,get_string));   as_assert( r >= 0 );
 
-      r = DeclareMethod(engine,type_name,"int get_int(string arg, string def) const",       asMETHOD(as_args,get_int_def));      as_assert( r >= 0 );
+      r = DeclareMethod(engine,type_name,"int get_int(string arg, int def) const",       asMETHOD(as_args,get_int_def));      as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"uint get_uint(string arg, uint def) const",       asMETHOD(as_args,get_uint_def));     as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"double get_double(string arg, double def) const", asMETHOD(as_args,get_double_def));   as_assert( r >= 0 );
+      r = DeclareMethod(engine,type_name,"double get_unsigned_double(string arg, double def) const", asMETHOD(as_args,get_unsigned_double_def));   as_assert( r >= 0 );
       r = DeclareMethod(engine,type_name,"string get_string(string arg, string def) const", asMETHOD(as_args,get_string_def));   as_assert( r >= 0 );
 
    }

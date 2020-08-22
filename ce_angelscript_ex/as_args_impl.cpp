@@ -3,6 +3,34 @@
 #include "cf_syslib/stringtokens.h"
 #include <stdexcept>
 #include <sstream>
+#include <regex>
+
+// https://stackoverflow.com/questions/4654636/how-to-determine-if-a-string-is-a-number-with-c
+static const std::regex INT_TYPE("[+-]?[0-9]+");
+static const std::regex UNSIGNED_INT_TYPE("[+]?[0-9]+");
+static const std::regex DOUBLE_TYPE("[+-]?[0-9]+[.]?[0-9]+");
+static const std::regex UNSIGNED_DOUBLE_TYPE("[+]?[0-9]+[.]?[0-9]+");
+
+bool isIntegerType(const std::string& str_)
+{
+  return std::regex_match(str_, INT_TYPE);
+}
+
+bool isUnsignedIntegerType(const std::string& str_)
+{
+  return std::regex_match(str_, UNSIGNED_INT_TYPE);
+}
+
+bool isDoubleType(const std::string& str_)
+{
+  return std::regex_match(str_, DOUBLE_TYPE);
+}
+
+bool isUnsignedDoubleType(const std::string& str_)
+{
+  return std::regex_match(str_, UNSIGNED_DOUBLE_TYPE);
+}
+
 
 as_args_impl::as_args_impl()
 {}
@@ -46,7 +74,9 @@ bool as_args_impl::has_argument(const string& arg) const
 int as_args_impl::get_int(const string& arg) const
 {
    string value = get_string(arg);
-   if(value.length()==0) throw std::runtime_error("Argument '" + arg + "' has no value assigned");
+   if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
+
+   if(!isIntegerType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid integer");
 
    istringstream in(value);
    int val=0;
@@ -57,7 +87,9 @@ int as_args_impl::get_int(const string& arg) const
 size_t as_args_impl::get_uint(const string& arg) const
 {
    string value = get_string(arg);
-   if(value.length()==0) throw std::runtime_error("Argument '" + arg + "' has no value assigned");
+   if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
+
+   if(!isUnsignedIntegerType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid unsigned integer");
 
    istringstream in(value);
    size_t val=0;
@@ -69,7 +101,9 @@ size_t as_args_impl::get_uint(const string& arg) const
 double as_args_impl::get_double(const string& arg) const
 {
    string value = get_string(arg);
-   if(value.length()==0) throw std::runtime_error("Argument '" + arg + "' has no value assigned");
+   if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
+
+   if(!isDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid floating point value");
 
    istringstream in(value);
    double val=0.0;
@@ -77,10 +111,24 @@ double as_args_impl::get_double(const string& arg) const
    return val;
 }
 
+double as_args_impl::get_unsigned_double(const string& arg) const
+{
+   string value = get_string(arg);
+   if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
+
+   if(!isUnsignedDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid unsigned floating point value");
+
+   istringstream in(value);
+   double val=0.0;
+   in >> val;
+   return val;
+}
+
+
 string as_args_impl::get_string(const string& arg) const
 {
    auto i = m_args.find(arg);
-   if(i == m_args.end()) throw std::runtime_error("Required argument '" + arg + "' was not specified");
+   if(i == m_args.end()) throw std::runtime_error("Required script argument '" + arg + "' was not specified");
    return i->second;
 }
 
@@ -99,6 +147,14 @@ size_t as_args_impl::get_uint(const string& arg, size_t def) const
 double as_args_impl::get_double(const string& arg, double def) const
 {
    if(has_argument(arg)) return get_double(arg);
+   return def;
+}
+
+double as_args_impl::get_unsigned_double(const string& arg, double def) const
+{
+   if(has_argument(arg)) return get_unsigned_double(arg);
+
+   if(def < 0.0) throw std::runtime_error("Default script argument value '" + arg+'='+ std::to_string(def) + "' is invalid (not unsigned)");
    return def;
 }
 
