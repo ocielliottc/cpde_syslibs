@@ -12,15 +12,8 @@ static const std::regex UNSIGNED_INT_TYPE("[+]?[0-9]+");
 // this is too strict, requiring period
 //static const std::regex DOUBLE_TYPE("[+-]?[0-9]+[.]?[0-9]+");
 
-// https://stackoverflow.com/questions/10516967/regexp-for-a-double
-// this does not allow leading +, only leading -
-//static const std::regex DOUBLE_TYPE("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
-
-// Above adjusted to allow leading + and - signs
-//static const std::regex DOUBLE_TYPE("^[+-]?(0|([1-9][0-9]*))(\\.[0-9]+)?$");
-
-// Above adjusted to allow 1. as double
-static const std::regex DOUBLE_TYPE("^[+-]?(0|([1-9][0-9]*))[\\.[0-9]+]?$");
+// https://stackoverflow.com/questions/12643009/regular-expression-for-floating-point-numbers
+static const std::regex DOUBLE_TYPE("[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)");
 
 bool isIntegerType(const std::string& str_)
 {
