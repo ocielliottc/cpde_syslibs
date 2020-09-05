@@ -8,8 +8,19 @@
 // https://stackoverflow.com/questions/4654636/how-to-determine-if-a-string-is-a-number-with-c
 static const std::regex INT_TYPE("[+-]?[0-9]+");
 static const std::regex UNSIGNED_INT_TYPE("[+]?[0-9]+");
-static const std::regex DOUBLE_TYPE("[+-]?[0-9]+[.]?[0-9]+");
-static const std::regex UNSIGNED_DOUBLE_TYPE("[+]?[0-9]+[.]?[0-9]+");
+
+// this is too strict, requiring period
+//static const std::regex DOUBLE_TYPE("[+-]?[0-9]+[.]?[0-9]+");
+
+// https://stackoverflow.com/questions/10516967/regexp-for-a-double
+// this does not allow leading +, only leading -
+//static const std::regex DOUBLE_TYPE("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+
+// Above adjusted to allow leading + and - signs
+//static const std::regex DOUBLE_TYPE("^[+-]?(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+
+// Above adjusted to allow 1. as double
+static const std::regex DOUBLE_TYPE("^[+-]?(0|([1-9][0-9]*))[\\.[0-9]+]?$");
 
 bool isIntegerType(const std::string& str_)
 {
@@ -25,12 +36,6 @@ bool isDoubleType(const std::string& str_)
 {
   return std::regex_match(str_, DOUBLE_TYPE);
 }
-
-bool isUnsignedDoubleType(const std::string& str_)
-{
-  return std::regex_match(str_, UNSIGNED_DOUBLE_TYPE);
-}
-
 
 as_args_impl::as_args_impl()
 {}
@@ -103,7 +108,10 @@ double as_args_impl::get_double(const string& arg) const
    string value = get_string(arg);
    if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
 
-   if(!isDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid floating point value");
+   // we explicitly allow valid integers as a subset of double
+   if(!isIntegerType(value)) {
+      if(!isDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid floating point value");
+   }
 
    istringstream in(value);
    double val=0.0;
@@ -116,11 +124,17 @@ double as_args_impl::get_unsigned_double(const string& arg) const
    string value = get_string(arg);
    if(value.length()==0) throw std::runtime_error("Script argument '" + arg + "' has no value assigned (check use of delimiters)");
 
-   if(!isUnsignedDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid unsigned floating point value");
+   // we explicitly allow valid integers as a subset of double
+   if(!isIntegerType(value)) {
+      if(!isDoubleType(value)) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid floating point value");
+   }
 
    istringstream in(value);
    double val=0.0;
    in >> val;
+
+   if(val < 0.0) throw std::runtime_error("Script argument '" + arg+'='+value + "' is not a valid unsigned floating point value");
+
    return val;
 }
 
