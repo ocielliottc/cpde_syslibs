@@ -74,6 +74,9 @@ static void MessageCallbackSilent(const asSMessageInfo* msg, void *param)
    // do nothing
 }
 
+
+bool  as_factory::m_enable_virtual_property = false;
+
 as_factory* as_factory::m_singleton=0;
 as_factory* as_factory::singleton()
 {
@@ -202,7 +205,9 @@ as_factory::as_factory()
 
    // http://www.angelcode.com/angelscript/sdk/docs/manual/doc_adv_custom_options.html#doc_adv_custom_options_lang_mod
    // disable virtual property accessors all together by setting the engine property to 0
-   m_engine->SetEngineProperty(asEP_PROPERTY_ACCESSOR_MODE,0);
+   if(!m_enable_virtual_property) {
+      m_engine->SetEngineProperty(asEP_PROPERTY_ACCESSOR_MODE,0);
+   }
 
    // AngelScript doesn't have a built-in string type, as there is no definite standard
    // string type for C++ applications. Every developer is free to register it's own string type.

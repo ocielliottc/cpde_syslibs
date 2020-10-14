@@ -86,6 +86,8 @@ public:
    // return the internal arguments parser
    shared_ptr<as_args_impl> get_args_impl() { return m_args; }
 
+   static void enable_virtual_property(bool enable) { m_enable_virtual_property = enable; }
+
 private:
    as_factory();
    virtual ~as_factory();
@@ -105,6 +107,7 @@ private:
    int                m_col_number;   // column number from LineCallback
 private:
    static as_factory*  m_singleton;
+   static bool         m_enable_virtual_property;
 };
 
 inline as_factory* asF() { return as_factory::singleton(); }
