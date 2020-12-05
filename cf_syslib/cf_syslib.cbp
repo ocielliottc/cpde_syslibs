@@ -132,8 +132,12 @@
 		</Linker>
 		<Unit filename="cf_syslib.cbp" />
 		<Unit filename="cf_syslib_config.h" />
+		<Unit filename="recursive_file_search.cpp" />
+		<Unit filename="recursive_file_search.h" />
 		<Unit filename="replace_substring.cpp" />
 		<Unit filename="replace_substring.h" />
+		<Unit filename="std_filename.cpp" />
+		<Unit filename="std_filename.h" />
 		<Unit filename="string_trim.cpp" />
 		<Unit filename="string_trim.h" />
 		<Unit filename="stringtokens.cpp" />
