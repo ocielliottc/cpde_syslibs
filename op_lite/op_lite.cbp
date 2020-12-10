@@ -91,7 +91,6 @@
 					<Add option="-D_7ZIP_ST" />
 				</Compiler>
 				<Linker>
-					<Add library="msgpackc" />
 					<Add library="dl" />
 				</Linker>
 				<ExtraCommands>
@@ -116,7 +115,6 @@
 					<Add option="-D_7ZIP_ST" />
 				</Compiler>
 				<Linker>
-					<Add library="msgpackc" />
 					<Add library="dl" />
 				</Linker>
 				<ExtraCommands>
