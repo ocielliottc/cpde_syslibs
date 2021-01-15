@@ -107,7 +107,7 @@ void sqBlob::pack_blob(size_t ctyp, const unsigned char* data, size_t nbytes)
 
       // use specified compression
       size_t usiz = nbytes;
-      vector<unsigned char> cdata;
+      std::vector<unsigned char> cdata;
       switch(ctyp) {
          case 1: { op_miniz::Compress1(cdata,data,usiz); break; }
          case 2: {  op_lzma::Compress1(cdata,data,usiz); break; }
@@ -140,7 +140,7 @@ size_t sqBlob::unpack_blob(unsigned char* data, size_t max_bytes) const
       // we have compressed data
       size_t csiz   = m_header.csiz();
       size_t usiz   = m_header.usiz();
-      vector<unsigned char> udata(usiz);
+      std::vector<unsigned char> udata(usiz);
       // use specified uncompress
       switch(ctyp) {
          case 1: { op_miniz::Uncompress1(udata,usiz,&m_data[0]+offset,csiz); break; }

@@ -57,12 +57,12 @@ public:
    /*!  \param  vec  vector of data to be stored in blob
         \param  ctyp compression type. 0=no compression, 1=miniz, 2=lzma  */
    template <typename T>
-   sqBlob(const vector<T>& vec, size_t ctyp);
+   sqBlob(const std::vector<T>& vec, size_t ctyp);
 
    /// Unpack the blob as a vector of given native type
    /*!  \param  vec  vector returned */
    template <typename T>
-   bool get_vector(vector<T>& vec) const;
+   bool get_vector(std::vector<T>& vec) const;
 
    /// construct blob from native, *uncompressed* byte array
    /*!  \param  data native byte array with uncompressed blob data
@@ -78,7 +78,7 @@ public:
 
    /// return raw blob data as stored, without any unpacking
    /*! \return raw blob data as stored, without any unpacking */
-   const vector<unsigned char>& raw_data() const { return m_data; }
+   const std::vector<unsigned char>& raw_data() const { return m_data; }
 
 private:
    /// \privatesection (hidden in documentation)
@@ -104,19 +104,19 @@ private:
       IDint64 hval[4];
    };
 private:
-   Header                m_header; // header duplicate for easy access
-   vector<unsigned char> m_data;   // actual data stored in SQL, including header
+   Header                     m_header; // header duplicate for easy access
+   std::vector<unsigned char> m_data;   // actual data stored in SQL, including header
 };
 
 template <typename T>
-sqBlob::sqBlob(const vector<T>& vec, size_t ctyp)
+sqBlob::sqBlob(const std::vector<T>& vec, size_t ctyp)
 {
    size_t nbytes = sizeof(T)*vec.size();
    pack_blob(ctyp,(unsigned char*)&vec[0],nbytes);
 }
 
 template <typename T>
-bool sqBlob::get_vector(vector<T>& vec) const
+bool sqBlob::get_vector(std::vector<T>& vec) const
 {
    vec.clear();
    size_t nbytes = m_header.usiz();

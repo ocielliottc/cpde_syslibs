@@ -111,7 +111,7 @@ void op_map<K,V>::unpack(const sqBlob& blob)
    if(blob.size_bytes() > 0) {
 
       // get_vector ensures that the blob data is uncompressed to a buffer
-      vector<unsigned char> vec;
+      std::vector<unsigned char> vec;
       blob.get_vector(vec);
 
       // then unpack the message buffer

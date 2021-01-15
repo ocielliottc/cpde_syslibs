@@ -162,7 +162,7 @@ bool op_ptr<T>::reconstruct(const string& ptxt, op_database* db) const
 
    // split the persistent string into tokens
    string token;
-   vector<string> tokens;
+   std::vector<string> tokens;
    istringstream in(ptxt);
    while(in >> token)tokens.push_back(token);
 

@@ -130,6 +130,6 @@ private:
    sqPK     m_pk;     // primary key info
 };
 
-typedef vector<sqColumn*> op_values;
+typedef std::vector<sqColumn*> op_values;
 
 #endif // SQCOLUMN_H

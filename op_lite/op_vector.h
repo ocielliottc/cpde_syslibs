@@ -9,8 +9,8 @@ using namespace std;
 template <typename T>
 class op_vector : public op_packed {
 public:
-   typedef typename vector<T>::iterator iterator;
-   typedef typename vector<T>::const_iterator const_iterator;
+   typedef typename std::vector<T>::iterator iterator;
+   typedef typename std::vector<T>::const_iterator const_iterator;
 
    /// constructor used via op_construct() to initialize persistent vector member
    /*! \param colnam column name of vector */
@@ -19,7 +19,7 @@ public:
    /// constructor used via op_construct_v1() to initialize persistent vector member
    /*! \param colnam column name of vector
        \param vec std::vector containing initial values */
-   op_vector(const string& colnam, const vector<T>& vec ) : op_packed(colnam),m_vec(vec) {}
+   op_vector(const string& colnam, const std::vector<T>& vec ) : op_packed(colnam),m_vec(vec) {}
 
    /// destructor
    virtual ~op_vector() {}
@@ -64,7 +64,7 @@ public:
    void reserve(size_t n)                      { m_vec.reserve(n); }
 
    /// special function to return read access to "native" std::vector member
-   const vector<T>& native() const             { return m_vec; }
+   const std::vector<T>& native() const        { return m_vec; }
 
 protected:
    /// \privatesection (hidden in documentation)
@@ -80,7 +80,7 @@ protected:
    void unpack(const sqBlob& blob);
 
 private:
-   vector<T> m_vec;
+   std::vector<T> m_vec;
 };
 
 
@@ -105,7 +105,7 @@ void op_vector<T>::unpack(const sqBlob& blob)
    if(blob.size_bytes() > 0) {
 
       // get_vector ensures that the data is uncompressed
-      vector<unsigned char> vec;
+      std::vector<unsigned char> vec;
       blob.get_vector(vec);
 
       // then unpack the message
