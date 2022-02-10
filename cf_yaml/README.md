@@ -2,9 +2,10 @@
 CPDE yml library based on https://github.com/jbeder/yaml-cpp
 
 ## Introduction
-cf_yaml introduces extension to yaml-cpp to simplyfy yml-parsinf
+cf_yaml introduces extension to yaml-cpp to simplify yml-parsing
 
 ## Example
+Code example shows how an yml-file can be parsed into memory and navigated in
 
 ```cpp
 #include <iostream>
@@ -71,6 +72,8 @@ int main(int argc, char **argv)
    return 0;
 }
 ```
+
+Debug output produced:
 
 ```text
 <m4> {
