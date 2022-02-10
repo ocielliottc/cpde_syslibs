@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="cf_yaml" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc" />
+		<Build>
+			<Target title="MSVC_Debug">
+				<Option output=".cmp/msvc/bin/Debug/libcf_yamld" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/GF" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/RTCsu" />
+					<Add option="/Fd$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).pdb" />
+					<Add option="/EHsc" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="/NODEFAULTLIB:libcmt.lib" />
+					<Add option="/NODEFAULTLIB:msvcrt.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="msvcrtd.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="MSVC_Release">
+				<Option output=".cmp/msvc/bin/Release/libcf_yaml" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/msvc/obj/Release/" />
+				<Option type="3" />
+				<Option compiler="msvc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/GF" />
+					<Add option="/Ox" />
+					<Add option="/W3" />
+					<Add option="/EHsc" />
+					<Add option="/D_CRT_SECURE_NO_WARNINGS" />
+					<Add option="/D_CRT_NONSTDC_NO_DEPRECATE" />
+					<Add option="/D_CRT_SECURE_DEPRECATE" />
+				</Compiler>
+				<Linker>
+					<Add option="/NODEFAULTLIB:libcmtd.lib" />
+					<Add option="/NODEFAULTLIB:msvcrtd.lib" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="msvcrt.lib" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Debug">
+				<Option output=".cmp/gcc/bin/Debug/cf_yamld" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc_generic" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-DNOPCH" />
+					<Add option="-fexceptions" />
+					<Add option="-D_DEBUG" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="GCC_Release">
+				<Option output=".cmp/gcc/bin/Release/cf_yaml" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".cmp/gcc/obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc_generic" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-W" />
+					<Add option="-fPIC" />
+					<Add option="-DNOPCH" />
+					<Add option="-fexceptions" />
+					<Add option="-Os" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<ExtraCommands>
+					<Add before="rm -f $(TARGET_OUTPUT_FILE)" />
+					<Add after="$(CPDE_USR)/bin/cpde_usr -dll -project=$(PROJECT_NAME)  -root=$(PROJECT_DIR)  -build=$(TARGET_NAME)  -target=$(TARGET_OUTPUT_FILE)  -usr=$(CPDE_USR)" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DCF_YAML_IMPLEMENTATION" />
+			<Add option="-Dyaml_cpp_EXPORTS" />
+			<Add directory="$(CPDE_USR)/include" />
+			<Add directory="./include" />
+		</Compiler>
+		<Linker>
+			<Add directory="$(CPDE_USR)/lib" />
+		</Linker>
+		<Unit filename="cf_yaml.h" />
+		<Unit filename="cf_yaml_config.h" />
+		<Unit filename="cf_yaml_doc.cpp" />
+		<Unit filename="cf_yaml_doc.h" />
+		<Unit filename="cf_yaml_handler.cpp" />
+		<Unit filename="cf_yaml_handler.h" />
+		<Unit filename="cf_yaml_map.cpp" />
+		<Unit filename="cf_yaml_map.h" />
+		<Unit filename="cf_yaml_scalar.cpp" />
+		<Unit filename="cf_yaml_scalar.h" />
+		<Unit filename="cf_yaml_sequence.cpp" />
+		<Unit filename="cf_yaml_sequence.h" />
+		<Unit filename="cf_yaml_value.cpp" />
+		<Unit filename="cf_yaml_value.h" />
+		<Unit filename="include/yaml-cpp/anchor.h" />
+		<Unit filename="include/yaml-cpp/binary.h" />
+		<Unit filename="include/yaml-cpp/contrib/anchordict.h" />
+		<Unit filename="include/yaml-cpp/contrib/graphbuilder.h" />
+		<Unit filename="include/yaml-cpp/depthguard.h" />
+		<Unit filename="include/yaml-cpp/dll.h" />
+		<Unit filename="include/yaml-cpp/emitfromevents.h" />
+		<Unit filename="include/yaml-cpp/emitter.h" />
+		<Unit filename="include/yaml-cpp/emitterdef.h" />
+		<Unit filename="include/yaml-cpp/emittermanip.h" />
+		<Unit filename="include/yaml-cpp/emitterstyle.h" />
+		<Unit filename="include/yaml-cpp/eventhandler.h" />
+		<Unit filename="include/yaml-cpp/exceptions.h" />
+		<Unit filename="include/yaml-cpp/mark.h" />
+		<Unit filename="include/yaml-cpp/node/convert.h" />
+		<Unit filename="include/yaml-cpp/node/detail/impl.h" />
+		<Unit filename="include/yaml-cpp/node/detail/iterator.h" />
+		<Unit filename="include/yaml-cpp/node/detail/iterator_fwd.h" />
+		<Unit filename="include/yaml-cpp/node/detail/memory.h" />
+		<Unit filename="include/yaml-cpp/node/detail/node.h" />
+		<Unit filename="include/yaml-cpp/node/detail/node_data.h" />
+		<Unit filename="include/yaml-cpp/node/detail/node_iterator.h" />
+		<Unit filename="include/yaml-cpp/node/detail/node_ref.h" />
+		<Unit filename="include/yaml-cpp/node/emit.h" />
+		<Unit filename="include/yaml-cpp/node/impl.h" />
+		<Unit filename="include/yaml-cpp/node/iterator.h" />
+		<Unit filename="include/yaml-cpp/node/node.h" />
+		<Unit filename="include/yaml-cpp/node/parse.h" />
+		<Unit filename="include/yaml-cpp/node/ptr.h" />
+		<Unit filename="include/yaml-cpp/node/type.h" />
+		<Unit filename="include/yaml-cpp/noexcept.h" />
+		<Unit filename="include/yaml-cpp/null.h" />
+		<Unit filename="include/yaml-cpp/ostream_wrapper.h" />
+		<Unit filename="include/yaml-cpp/parser.h" />
+		<Unit filename="include/yaml-cpp/stlemitter.h" />
+		<Unit filename="include/yaml-cpp/traits.h" />
+		<Unit filename="include/yaml-cpp/yaml.h" />
+		<Unit filename="src/binary.cpp" />
+		<Unit filename="src/collectionstack.h" />
+		<Unit filename="src/contrib/graphbuilder.cpp" />
+		<Unit filename="src/contrib/graphbuilderadapter.cpp" />
+		<Unit filename="src/contrib/graphbuilderadapter.h" />
+		<Unit filename="src/convert.cpp" />
+		<Unit filename="src/depthguard.cpp" />
+		<Unit filename="src/directives.cpp" />
+		<Unit filename="src/directives.h" />
+		<Unit filename="src/emit.cpp" />
+		<Unit filename="src/emitfromevents.cpp" />
+		<Unit filename="src/emitter.cpp" />
+		<Unit filename="src/emitterstate.cpp" />
+		<Unit filename="src/emitterstate.h" />
+		<Unit filename="src/emitterutils.cpp" />
+		<Unit filename="src/emitterutils.h" />
+		<Unit filename="src/exceptions.cpp" />
+		<Unit filename="src/exp.cpp" />
+		<Unit filename="src/exp.h" />
+		<Unit filename="src/indentation.h" />
+		<Unit filename="src/memory.cpp" />
+		<Unit filename="src/node.cpp" />
+		<Unit filename="src/node_data.cpp" />
+		<Unit filename="src/nodebuilder.cpp" />
+		<Unit filename="src/nodebuilder.h" />
+		<Unit filename="src/nodeevents.cpp" />
+		<Unit filename="src/nodeevents.h" />
+		<Unit filename="src/null.cpp" />
+		<Unit filename="src/ostream_wrapper.cpp" />
+		<Unit filename="src/parse.cpp" />
+		<Unit filename="src/parser.cpp" />
+		<Unit filename="src/ptr_vector.h" />
+		<Unit filename="src/regex_yaml.cpp" />
+		<Unit filename="src/regex_yaml.h" />
+		<Unit filename="src/regeximpl.h" />
+		<Unit filename="src/scanner.cpp" />
+		<Unit filename="src/scanner.h" />
+		<Unit filename="src/scanscalar.cpp" />
+		<Unit filename="src/scanscalar.h" />
+		<Unit filename="src/scantag.cpp" />
+		<Unit filename="src/scantag.h" />
+		<Unit filename="src/scantoken.cpp" />
+		<Unit filename="src/setting.h" />
+		<Unit filename="src/simplekey.cpp" />
+		<Unit filename="src/singledocparser.cpp" />
+		<Unit filename="src/singledocparser.h" />
+		<Unit filename="src/stream.cpp" />
+		<Unit filename="src/stream.h" />
+		<Unit filename="src/streamcharsource.h" />
+		<Unit filename="src/stringsource.h" />
+		<Unit filename="src/tag.cpp" />
+		<Unit filename="src/tag.h" />
+		<Unit filename="src/token.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
