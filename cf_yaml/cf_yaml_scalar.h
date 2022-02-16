@@ -9,12 +9,16 @@ public:
    cf_yaml_scalar(const std::string& value);
    virtual ~cf_yaml_scalar();
 
+   // set a new value
+   void set_value(const std::string& value) { m_value = value; }
+
    bool is_scalar() const { return true; }
    virtual std::string value() const { return m_value; }
 
+public:
    virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
-
    void debug_print(size_t indent, std::ostream& out);
+
 private:
    std::string m_value;
 };

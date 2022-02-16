@@ -10,14 +10,19 @@ public:
    cf_yaml_sequence();
    virtual ~cf_yaml_sequence();
 
-   size_t assign(cf_yaml_value_ptr ptr);
+   // push additional value to back of sequence
+   void push_back(cf_yaml_value_ptr ptr) { m_vec.push_back(ptr); }
 
    // retrieve value by index
    cf_yaml_value_ptr get(size_t index, bool throw_exception = true);
 
+public:
    virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
+   virtual void debug_print(size_t indent, std::ostream& out);
 
-   void debug_print(size_t indent, std::ostream& out);
+protected:
+   size_t assign(cf_yaml_value_ptr ptr);
+
 private:
    std::vector<cf_yaml_value_ptr> m_vec;
 };
