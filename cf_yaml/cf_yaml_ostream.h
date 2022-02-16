@@ -7,6 +7,7 @@
 
 namespace YAML  { class Emitter; }
 
+// output stream for writing YAML text
 class CF_YAML_PUBLIC cf_yaml_ostream {
 public:
    cf_yaml_ostream();

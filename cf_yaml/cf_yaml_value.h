@@ -10,7 +10,7 @@
 class cf_yaml_value;
 using cf_yaml_value_ptr = std::shared_ptr<cf_yaml_value>;
 
-// abstract base class for yml values parsed with cf_yaml_handler
+// abstract base class for yml values parsed with cf_yaml_handler or created programmatically
 class CF_YAML_PUBLIC cf_yaml_value {
    friend class cf_yaml_handler;
 

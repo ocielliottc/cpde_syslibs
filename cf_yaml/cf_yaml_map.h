@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-// map class for yml values parsed with cf_yaml_handler
+// map class for yml values parsed with cf_yaml_handler or created programmatically
 class CF_YAML_PUBLIC cf_yaml_map : public cf_yaml_value {
 public:
    cf_yaml_map();

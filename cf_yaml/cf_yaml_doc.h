@@ -10,25 +10,26 @@
 class cf_yaml_doc;
 using cf_yaml_doc_ptr = std::shared_ptr<cf_yaml_doc>;
 
-// cf_yaml_doc is the return value of parsing with cf_yaml_handler
+// cf_yaml_doc is returned from cf_yaml_doc::parse() or created programmatically
 class CF_YAML_PUBLIC cf_yaml_doc {
 public:
    friend class cf_yaml_handler;
 
+   // create document by parsing YAML text
    static cf_yaml_doc_ptr parse(std::istream& in);
 
+   // create document by default constructor and root assignment
    cf_yaml_doc();
+   cf_yaml_value_ptr assign_root(cf_yaml_value_ptr root);
+
    virtual ~cf_yaml_doc();
 
    bool is_empty() const { return (m_root==nullptr); }
 
-   // return the root value
+   // return the root pointer
    cf_yaml_value_ptr get_root() const { return m_root; }
 
    cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
-
-protected:
-   cf_yaml_value_ptr assign_root(cf_yaml_value_ptr root);
 
 private:
    cf_yaml_value_ptr m_root;

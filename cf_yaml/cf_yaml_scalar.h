@@ -3,7 +3,7 @@
 
 #include "cf_yaml_value.h"
 
-// scalar class for yml values parsed with cf_yaml_handler
+// scalar class for yml values parsed with cf_yaml_handler or created programmatically
 class CF_YAML_PUBLIC cf_yaml_scalar : public cf_yaml_value {
 public:
    cf_yaml_scalar(const std::string& value);
