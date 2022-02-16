@@ -1,5 +1,6 @@
 #include "cf_yaml_map.h"
 #include <stdexcept>
+#include "cf_yaml.h"
 
 cf_yaml_map::cf_yaml_map()
 {}
@@ -62,4 +63,22 @@ void cf_yaml_map::debug_print(size_t indent, std::ostream& out)
       }
    }
    out << std::endl << ind <<" }";
+}
+
+cf_yaml_ostream&  cf_yaml_map::to_yaml(cf_yaml_ostream& out) const
+{
+   auto& yout = out.emitter();
+
+   yout << YAML::BeginMap;
+   for(auto key : m_insert_order) {
+      auto it = m_map.find(key);
+      if(it != m_map.end()) {
+         yout << YAML::Key << key;
+         yout << YAML::Value;
+         it->second->to_yaml(out);
+      }
+   }
+   yout << YAML::EndMap;
+
+   return out;
 }

@@ -12,9 +12,13 @@ public:
    bool is_scalar() const { return true; }
    virtual std::string value() const { return m_value; }
 
+   virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
+
    void debug_print(size_t indent, std::ostream& out);
 private:
    std::string m_value;
 };
+
+
 
 #endif // CF_YAML_SCALAR_H

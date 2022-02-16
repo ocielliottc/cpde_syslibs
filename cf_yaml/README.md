@@ -42,25 +42,16 @@ int main(int argc, char **argv)
       std::istringstream in(ymltext);
       if(cf_yaml_doc_ptr doc = cf_yaml_doc::parse(in)) {
 
-         // navigate in the tree and produce some debug print
-         cf_yaml_value_ptr root = doc->get_root();
-
-         std::cout << std::endl << "===== debug_print: root " << std::endl;
-         root->debug_print(0,cout);
+         std::cout << std::endl << "===== Echo of parsed doc" << std::endl << std::endl;
+         cf_yaml_ostream out(cout);
+         out << doc;
          std::cout << std::endl;
 
-         std::cout << std::endl << "===== debug_print: root->get(\"spec\")->get(\"containers\")->get(1);" << std::endl;
-
-         // move to the "spec" section of the roo matrix
-         if( auto spec = root->get("spec",false)) {
-
-            // move to "containers" and get the second (index=1) entry in the squence
-            auto matrix = spec->get("containers")->get(1);
-
-            // debug print the matrix there
-            matrix->debug_print(9,cout);
-            std::cout << std::endl;
-         }
+         std::cout << std::endl;
+         std::cout << "===== navigate in the parsed document and output the relevant part"   <<  std::endl;
+         std::cout << "===== out << root->get(\"spec\")->get(\"containers\")->get(1);" << std::endl;
+         out << doc->get_root()->get("spec")->get("containers")->get(1);
+         std::cout << std::endl;
 
       }
    }
@@ -73,55 +64,31 @@ int main(int argc, char **argv)
 ```
 
 ```text
-<m4> {
-   apiVersion:  v3
-   kind:  Pod
-   metadata:
-      <m2> {
-         name:  rss-site
-         labels:
-            <m1> {
-               app:  web
-             }
-       }
-   spec:
-      <m1> {
-         containers:
-            <s2> [
-               <m3> {
-                  name:  front-end
-                  image:  nginx
-                  ports:
-                     <s1> [
-                        <m1> {
-                           containerPort:  80
-                         }
-                      ]
-                }
-               <m3> {
-                  name:  rss-reader
-                  image:  nickchase/rss-php-nginx:v1
-                  ports:
-                     <s1> [
-                        <m1> {
-                           containerPort:  88
-                         }
-                      ]
-                }
-             ]
-       }
- }
+===== Echo of parsed doc
 
-===== debug_print: root->get("spec")->get("containers")->get(1);
+apiVersion: v3
+kind: Pod
+metadata:
+  name: rss-site
+  labels:
+    app: web
+spec:
+  containers:
+    - name: front-end
+      image: nginx
+      ports:
+        - containerPort: 80
+    - name: rss-reader
+      image: nickchase/rss-php-nginx:v1
+      ports:
+        - containerPort: 88
 
-         <m3> {
-            name:  rss-reader
-            image:  nickchase/rss-php-nginx:v1
-            ports:
-               <s1> [
-                  <m1> {
-                     containerPort:  88
-                   }
-                ]
-          }
+===== navigate in the parsed document and output the relevant part
+===== out << root->get("spec")->get("containers")->get(1);
+
+---
+name: rss-reader
+image: nickchase/rss-php-nginx:v1
+ports:
+  - containerPort: 88
 ```

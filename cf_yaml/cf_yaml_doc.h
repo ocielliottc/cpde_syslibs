@@ -5,6 +5,7 @@
 #include <memory>
 #include <istream>
 #include "cf_yaml_value.h"
+#include "cf_yaml_ostream.h"
 
 class cf_yaml_doc;
 using cf_yaml_doc_ptr = std::shared_ptr<cf_yaml_doc>;
@@ -24,11 +25,19 @@ public:
    // return the root value
    cf_yaml_value_ptr get_root() const { return m_root; }
 
+   cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
+
 protected:
    cf_yaml_value_ptr assign_root(cf_yaml_value_ptr root);
 
 private:
    cf_yaml_value_ptr m_root;
 };
+
+inline cf_yaml_ostream& operator<<(cf_yaml_ostream& out, const cf_yaml_doc& doc)
+{ return doc.to_yaml(out); }
+
+inline cf_yaml_ostream& operator<<(cf_yaml_ostream& out, cf_yaml_doc_ptr doc)
+{ return doc->to_yaml(out); }
 
 #endif // CF_YAML_DOC_H

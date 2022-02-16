@@ -15,6 +15,8 @@ public:
    // retrieve value by index
    cf_yaml_value_ptr get(size_t index, bool throw_exception = true);
 
+   virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
+
    void debug_print(size_t indent, std::ostream& out);
 private:
    std::vector<cf_yaml_value_ptr> m_vec;

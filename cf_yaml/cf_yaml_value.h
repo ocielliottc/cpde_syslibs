@@ -5,6 +5,7 @@
 #include <memory>
 #include <ostream>
 #include "cf_yaml_config.h"
+#include "cf_yaml_ostream.h"
 
 class cf_yaml_value;
 using cf_yaml_value_ptr = std::shared_ptr<cf_yaml_value>;
@@ -25,7 +26,12 @@ public:
    // retrieve value by index (typical for sequence)
    virtual cf_yaml_value_ptr get(size_t index, bool throw_exception = true);
 
+   virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const = 0;
+
    virtual void debug_print(size_t indent, std::ostream& out) = 0;
 };
+
+inline cf_yaml_ostream& operator<<(cf_yaml_ostream& out, cf_yaml_value_ptr value)
+{ return value->to_yaml(out); }
 
 #endif // CF_YAML_VALUE_H

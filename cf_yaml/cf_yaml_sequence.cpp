@@ -1,5 +1,6 @@
 #include "cf_yaml_sequence.h"
 #include <stdexcept>
+#include "cf_yaml.h"
 
 cf_yaml_sequence::cf_yaml_sequence()
 {}
@@ -39,3 +40,16 @@ void cf_yaml_sequence::debug_print(size_t indent, std::ostream& out)
    else                  out << std::endl << ind <<" ]";
 }
 
+
+cf_yaml_ostream&  cf_yaml_sequence::to_yaml(cf_yaml_ostream& out) const
+{
+   auto& yout = out.emitter();
+
+   yout << YAML::BeginSeq;
+   for(auto v : m_vec) {
+      v->to_yaml(out);
+   }
+   yout << YAML::EndSeq;
+
+   return out;
+}

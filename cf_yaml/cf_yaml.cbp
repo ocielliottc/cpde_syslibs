@@ -7,7 +7,7 @@
 		<Option compiler="msvc" />
 		<Build>
 			<Target title="MSVC_Debug">
-				<Option output=".cmp/msvc/bin/Debug/libcf_yamld" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Debug/cf_yamld" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
@@ -37,7 +37,7 @@
 				</ExtraCommands>
 			</Target>
 			<Target title="MSVC_Release">
-				<Option output=".cmp/msvc/bin/Release/libcf_yaml" prefix_auto="1" extension_auto="1" />
+				<Option output=".cmp/msvc/bin/Release/cf_yaml" prefix_auto="0" extension_auto="1" />
 				<Option object_output=".cmp/msvc/obj/Release/" />
 				<Option type="3" />
 				<Option compiler="msvc" />
@@ -129,6 +129,8 @@
 		<Unit filename="cf_yaml_handler.h" />
 		<Unit filename="cf_yaml_map.cpp" />
 		<Unit filename="cf_yaml_map.h" />
+		<Unit filename="cf_yaml_ostream.cpp" />
+		<Unit filename="cf_yaml_ostream.h" />
 		<Unit filename="cf_yaml_scalar.cpp" />
 		<Unit filename="cf_yaml_scalar.h" />
 		<Unit filename="cf_yaml_sequence.cpp" />

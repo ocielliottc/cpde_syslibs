@@ -16,6 +16,8 @@ public:
    // retrieve value by string key
    cf_yaml_value_ptr get(const std::string& key, bool throw_exception = true);
 
+   virtual cf_yaml_ostream& to_yaml(cf_yaml_ostream& out) const;
+
    void debug_print(size_t indent, std::ostream& out);
 protected:
    void insert(const std::string& key, cf_yaml_value_ptr value);
