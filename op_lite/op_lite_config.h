@@ -26,6 +26,9 @@
    // warning C4390: warning C4309: 'static_cast' : truncation of constant value
    #pragma warning (disable:4390)
 
+   // warning C4834: discarding return value of function with 'nodiscard' attribute
+   #pragma warning (disable:4834)
+
    #ifdef OP_LITE_IMPLEMENTATION
       #define OP_LITE_PUBLIC __declspec(dllexport)
       #define OP_LITE_EXTERN
