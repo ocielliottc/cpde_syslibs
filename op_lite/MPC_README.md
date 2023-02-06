@@ -19,5 +19,5 @@ Then build with Visual Studio 2019.
 Install op_lite using the project installer that comes with MPC.
 
 ```
-$MPC_ROOT/prj_install.pl <full install path> op_lite.ins -b header_files=include -b lib_output=lib -a lib_output
+$MPC_ROOT/prj_install.pl <full install path> op_lite.ins -b header_files=op_lite -b lib_output=lib -a lib_output
 ```
