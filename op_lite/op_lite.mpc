@@ -1,0 +1,19 @@
+project: boost_base, msgpack {
+  dynamicflags += OP_LITE_IMPLEMENTATION
+  macros += SQLITE_ENABLE_COLUMN_METADATA
+
+  Source_Files {
+    .
+    lzmalib
+    miniz/*.cpp
+    sqlite3
+  }
+
+  Header_Files {
+    mainpage.h
+    op_lite_config.h
+    op_msgpack.h
+    op_set.h
+    op_version.h
+  }
+}
